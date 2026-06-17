@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Xueqiu (雪球) — stock quotes, search, trending posts & hot stocks."""
+"""Xueqiu — stock quotes, search, trending posts & hot stocks."""
 
 import http.cookiejar
 import json
@@ -145,8 +145,8 @@ def _strip_html(text: str) -> str:
 
 class XueqiuChannel(Channel):
     name = "xueqiu"
-    description = "雪球股票行情与社区动态"
-    backends = ["Xueqiu API (需要登录 Cookie)"]
+    description = "Xueqiu stock quotes and community activity"
+    backends = ["Xueqiu API (login cookie required)"]
     tier = 1
 
     # ------------------------------------------------------------------ #
@@ -170,12 +170,12 @@ class XueqiuChannel(Channel):
             items = (data.get("data") or {}).get("items") or []
             if items:
                 self.active_backend = self.backends[0]
-                return "ok", "公开 API 可用（行情、搜索、热帖、热股）"
-            return "warn", "API 响应异常（返回数据为空）"
+                return "ok", "Public API available (quotes, search, hot posts, hot stocks)"
+            return "warn", "Abnormal API response (returned data is empty)"
         except Exception as e:
             return "warn", (
-                f"Xueqiu API 连接失败：{e}。"
-                "请先登录雪球后运行：agent-reach configure --from-browser chrome"
+                f"Xueqiu API connection failed: {e}. "
+                "Log into Xueqiu first, then run: agent-reach configure --from-browser chrome"
             )
 
     # ------------------------------------------------------------------ #
@@ -183,10 +183,10 @@ class XueqiuChannel(Channel):
     # ------------------------------------------------------------------ #
 
     def get_stock_quote(self, symbol: str) -> dict:
-        """获取实时股票行情。
+        """Get a real-time stock quote.
 
         Args:
-            symbol: 股票代码，如 SH600519（沪）、SZ000858（深）、AAPL（美）、00700（港）
+            symbol: Stock ticker, e.g. SH600519 (Shanghai), SZ000858 (Shenzhen), AAPL (US), 00700 (Hong Kong)
 
         Returns a dict with keys:
           symbol, name, current, percent, chg, high, low, open, last_close,
@@ -216,11 +216,11 @@ class XueqiuChannel(Channel):
         }
 
     def search_stock(self, query: str, limit: int = 10) -> list:
-        """搜索股票。
+        """Search for stocks.
 
         Args:
-            query: 股票代码或中文名称，如 "茅台"、"600519"
-            limit: 最多返回条数
+            query: Stock ticker or Chinese name, e.g. "Moutai", "600519"
+            limit: Maximum number of items to return
 
         Returns a list of dicts with keys:
           symbol, name, exchange
@@ -242,14 +242,14 @@ class XueqiuChannel(Channel):
         return results
 
     def get_hot_posts(self, limit: int = 20) -> list:
-        """获取雪球热门帖子。
+        """Get Xueqiu's hot posts.
 
         Uses the v4 public timeline endpoint which returns posts in a `list`
         array.  Each item carries a JSON-encoded `data` field containing the
         actual post payload (title, description, user, like_count, target).
 
         Args:
-            limit: 最多返回条数（上限 50）
+            limit: Maximum number of items to return (cap 50)
 
         Returns a list of dicts with keys:
           id, title, text, author, likes, url
@@ -288,11 +288,11 @@ class XueqiuChannel(Channel):
         return results
 
     def get_hot_stocks(self, limit: int = 10, stock_type: int = 10) -> list:
-        """获取热门股票排行。
+        """Get the hot stocks ranking.
 
         Args:
-            limit:      最多返回条数（上限 50）
-            stock_type: 10=人气榜（默认），12=关注榜
+            limit:      Maximum number of items to return (cap 50)
+            stock_type: 10=popularity ranking (default), 12=watchlist ranking
 
         Returns a list of dicts with keys:
           symbol, name, current, percent, rank

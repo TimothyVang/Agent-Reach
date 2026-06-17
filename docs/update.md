@@ -5,13 +5,13 @@
 Copy this to your AI Agent:
 
 ```
-帮我更新 Agent Reach：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md
+Help me update Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md
 ```
 
 Or in English:
 
 ```
-Update Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md
+Update Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md
 ```
 
 ---
@@ -32,17 +32,17 @@ Update Agent Reach to the latest version, refresh upstream tools, migrate from r
 agent-reach check-update
 ```
 
-If it says "已是最新版本", skip to Step 4 (verify). Otherwise continue.
+If it says "already on the latest version", skip to Step 4 (verify). Otherwise continue.
 
 ### Step 2: Update Agent Reach package
 
 ```bash
-pip install --upgrade https://github.com/Panniantong/agent-reach/archive/main.zip
+pip install --upgrade https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip
 ```
 
 > If pip complains about `externally-managed-environment` (PEP 668), the user
 > originally installed via pipx or a venv — use the matching command:
-> `pipx install --force https://github.com/Panniantong/agent-reach/archive/main.zip`
+> `pipx install --force https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip`
 > or activate `~/.agent-reach-venv` first.
 
 ### Step 3: Refresh upstream tools
@@ -67,10 +67,10 @@ which opencli  >/dev/null 2>&1 && npm update -g @jackwener/opencli 2>/dev/null
 ```
 
 **Desktop users without OpenCLI**: since v1.5.0 OpenCLI is the preferred
-backend for 小红书/Reddit (and adds B站 subtitles) by riding the user's
+backend for XiaoHongShu/Reddit (and adds Bilibili subtitles) by riding the user's
 browser session. Offer it once:
 
-> "这次更新引入了 OpenCLI 后端（复用你的浏览器登录态，小红书/Reddit 零配置）。要装吗？装完只需你在 Chrome 商店点一次『添加扩展』。"
+> "This update introduces the OpenCLI backend (reuses your browser login session, with zero config for XiaoHongShu/Reddit). Want to install it? Once it's done, you only need to click 'Add extension' once in the Chrome Web Store."
 
 If yes: `agent-reach install --channels opencli` and guide them through the
 extension click. If no, everything keeps working on existing backends.
@@ -96,7 +96,7 @@ separate skill-update step is needed.
 Check the doctor output:
 
 - Every channel shows ✅ / [!] with a clear message, and multi-backend
-  channels (小红书/Reddit/B站/Twitter) report `当前后端：…`
+  channels (XiaoHongShu/Reddit/Bilibili/Twitter) report `current backend: …`
 - If a previously-working channel now shows [X]/error, the message contains
   the exact fix (e.g. a venv-reinstall prescription) — run it, then re-check
 - `--json` gives the same data machine-readably (`active_backend` per channel)
