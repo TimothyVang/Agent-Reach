@@ -51,14 +51,14 @@ All Agent Reach files go in dedicated directories — **never in the agent works
 ```bash
 # Recommended: pipx (the easiest option)
 pipx install https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip
-agent-reach install --env=auto
+agent-reach-english install --env=auto
 
 # If your Python comes from Homebrew, or you hit PEP 668 (externally-managed-environment),
 # install inside a virtual environment:
 python3 -m venv ~/.agent-reach-venv
 source ~/.agent-reach-venv/bin/activate
 pip install https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip
-agent-reach install --env=auto
+agent-reach-english install --env=auto
 ```
 
 > 💡 **Windows / Microsoft Store Python alias?**
@@ -72,7 +72,7 @@ agent-reach install --env=auto
 > py -3 -m venv $env:USERPROFILE\.agent-reach-venv
 > $env:USERPROFILE\.agent-reach-venv\Scripts\Activate.ps1
 > python -m pip install https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip
-> agent-reach install --env=auto
+> agent-reach-english install --env=auto
 > ```
 
 This installs core infrastructure (gh CLI, Node.js, mcporter, Exa search, yt-dlp config) and activates these zero-config channels:
@@ -85,8 +85,8 @@ This installs core infrastructure (gh CLI, Node.js, mcporter, Exa search, yt-dlp
 **Safe mode / Dry run:**
 
 ```bash
-agent-reach install --env=auto --safe      # Check only, no auto-install
-agent-reach install --env=auto --dry-run   # Preview what would be done
+agent-reach-english install --env=auto --safe      # Check only, no auto-install
+agent-reach-english install --env=auto --dry-run   # Preview what would be done
 ```
 
 ### Step 2: Ask the user which optional channels they want
@@ -111,15 +111,15 @@ After installing the basics, **ask the user** which additional channels they nee
 Based on the user's choice, run:
 
 ```bash
-agent-reach install --env=auto --channels=opencli,xiaohongshu   # Example: desktop user chose XHS (OpenCLI-backed)
-agent-reach install --env=auto --channels=all              # User wants everything
+agent-reach-english install --env=auto --channels=opencli,xiaohongshu   # Example: desktop user chose XHS (OpenCLI-backed)
+agent-reach-english install --env=auto --channels=all              # User wants everything
 ```
 
 Supported channel names: `opencli`, `twitter`, `xiaoyuzhou`, `xueqiu`, `xiaohongshu`, `reddit`, `bilibili`, `linkedin`, `all`
 
 ### Step 3: Fix what's broken
 
-Run `agent-reach doctor` and check the output.
+Run `agent-reach-english doctor` and check the output.
 
 Try to get as many channels to ✅ as possible. If something failed during install or shows as ❌/⚠️ in doctor, diagnose the problem and try to fix it — but stay within the boundaries above. If a fix requires elevated permissions or system changes, ask the user first.
 
@@ -141,13 +141,13 @@ Some channels need credentials only the user can provide. Based on the doctor ou
 > 3. Click the extension → Export → Header String
 > 4. Send the exported string to the agent
 >
-> **Local desktop users** can also use `agent-reach configure --from-browser chrome` to extract everything automatically in one step (supports Twitter + XiaoHongShu + Xueqiu).
+> **Local desktop users** can also use `agent-reach-english configure --from-browser chrome` to extract everything automatically in one step (supports Twitter + XiaoHongShu + Xueqiu).
 
 **Twitter search & posting:**
 > "To unlock Twitter search, I need your Twitter cookies. Install the Cookie-Editor Chrome extension, go to x.com/twitter.com, click the extension → Export → Header String, and paste it to me."
 
 ```bash
-agent-reach configure twitter-cookies "PASTED_STRING"
+agent-reach-english configure twitter-cookies "PASTED_STRING"
 ```
 
 > **Proxy notes (for networks that require a proxy, such as mainland China):**
@@ -155,7 +155,7 @@ agent-reach configure twitter-cookies "PASTED_STRING"
 > twitter-cli and rdt-cli use Python, and in networks that require a proxy you can configure one via environment variables.
 >
 > **What you (the agent) need to do:**
-> 1. Confirm the user has configured a proxy: `agent-reach configure proxy http://user:pass@ip:port`
+> 1. Confirm the user has configured a proxy: `agent-reach-english configure proxy http://user:pass@ip:port`
 > 2. Set the environment variables: `export HTTP_PROXY="..." HTTPS_PROXY="..."`
 > 3. Agent Reach handles the rest automatically — the user does not need to do anything extra
 >
@@ -172,7 +172,7 @@ rdt login   # Automatically extracts browser cookies; on a server with no browse
 
 > Accessing Reddit from mainland China requires a proxy; if the server IP is rate-limited, you can configure a residential proxy (such as https://webshare.io, about $1/month):
 > ```bash
-> agent-reach configure proxy http://user:pass@ip:port
+> agent-reach-english configure proxy http://user:pass@ip:port
 > ```
 
 **XiaoHongShu (multiple backends — choose by environment):**
@@ -181,7 +181,7 @@ rdt login   # Automatically extracts browser cookies; on a server with no browse
 > "XiaoHongShu runs through OpenCLI — it reuses the login session in your browser, so if you've browsed XiaoHongShu before it just works, zero config."
 
 ```bash
-agent-reach install --channels opencli
+agent-reach-english install --channels opencli
 ```
 
 > After installation, guide the user through the one manual step you can't do for them (a Chrome security restriction):
@@ -198,14 +198,14 @@ agent-reach install --channels opencli
 >
 > **Existing users (xhs-cli):** An already-installed xhs-cli continues to work as a fallback backend (upstream stopped updating in 2026-03, so new installs are not recommended). `xhs login` automatically extracts browser cookies; if that fails, export with Cookie-Editor and then run:
 > ```bash
-> agent-reach configure xhs-cookies "key1=val1; key2=val2; ..."
+> agent-reach-english configure xhs-cookies "key1=val1; key2=val2; ..."
 > ```
 
 **Xueqiu (stock quotes + trending posts):**
 > "Xueqiu needs cookies from a logged-in session. First log into xueqiu.com in Chrome, then run:"
 
 ```bash
-agent-reach configure --from-browser chrome
+agent-reach-english configure --from-browser chrome
 ```
 
 > The cookies are extracted automatically along with the other platforms.
@@ -216,7 +216,7 @@ agent-reach configure --from-browser chrome
 The script is installed automatically with Agent Reach; the user only needs to provide a key:
 
 ```bash
-agent-reach configure groq-key gsk_xxxxx
+agent-reach-english configure groq-key gsk_xxxxx
 ```
 
 > **Get a Groq API key (free, no credit card, takes 30 seconds):**
@@ -280,7 +280,7 @@ pip install linkedin-scraper-mcp
 
 ### Step 4: Final check
 
-Run `agent-reach doctor` one final time and report the results to your user.
+Run `agent-reach-english doctor` one final time and report the results to your user.
 
 ### Step 5: Set up daily monitoring (OpenClaw only)
 
@@ -291,7 +291,7 @@ If you are running inside **OpenClaw**, ask your user:
 If the user agrees, create a **cron job** (daily, `sessionTarget: "isolated"`, `delivery: "announce"`) with this task:
 
 ```
-Run the agent-reach watch command.
+Run the agent-reach-english watch command.
 If the output contains "all good", do not notify the user — end silently.
 If the output contains problems (❌ ⚠️) or a new version (🆕), send the full report to the user along with a suggested fix.
 If a new version is available, ask the user whether they want to upgrade (sending this sentence to the user's agent will perform a full update: Help me update Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md).
@@ -305,17 +305,17 @@ If the user wants a different agent to handle it, let them choose.
 
 | Command | What it does |
 |---------|-------------|
-| `agent-reach install --env=auto` | Install core channels (lightweight, zero-config) |
-| `agent-reach install --env=auto --channels=twitter,xiaohongshu` | Install core + optional channels |
-| `agent-reach install --env=auto --channels=all` | Install everything |
-| `agent-reach install --env=auto --safe` | Safe setup (no auto system changes) |
-| `agent-reach install --env=auto --dry-run` | Preview what would be done |
-| `agent-reach doctor` | Show channel status |
-| `agent-reach watch` | Quick health + update check (for scheduled tasks) |
-| `agent-reach check-update` | Check for new versions |
-| `agent-reach configure twitter-cookies "..."` | Unlock Twitter search + posting |
-| `agent-reach configure proxy URL` | Save the proxy address (the agent reads it to set HTTP_PROXY/HTTPS_PROXY when accessing restricted networks like Reddit/Twitter — it is not an automatic unlock switch) |
-| `agent-reach configure groq-key gsk_xxx` | Unlock Xiaoyuzhou podcast transcription |
+| `agent-reach-english install --env=auto` | Install core channels (lightweight, zero-config) |
+| `agent-reach-english install --env=auto --channels=twitter,xiaohongshu` | Install core + optional channels |
+| `agent-reach-english install --env=auto --channels=all` | Install everything |
+| `agent-reach-english install --env=auto --safe` | Safe setup (no auto system changes) |
+| `agent-reach-english install --env=auto --dry-run` | Preview what would be done |
+| `agent-reach-english doctor` | Show channel status |
+| `agent-reach-english watch` | Quick health + update check (for scheduled tasks) |
+| `agent-reach-english check-update` | Check for new versions |
+| `agent-reach-english configure twitter-cookies "..."` | Unlock Twitter search + posting |
+| `agent-reach-english configure proxy URL` | Save the proxy address (the agent reads it to set HTTP_PROXY/HTTPS_PROXY when accessing restricted networks like Reddit/Twitter — it is not an automatic unlock switch) |
+| `agent-reach-english configure groq-key gsk_xxx` | Unlock Xiaoyuzhou podcast transcription |
 
 After installation, use upstream tools directly. See SKILL.md for the full command reference:
 
@@ -333,4 +333,4 @@ After installation, use upstream tools directly. See SKILL.md for the full comma
 | LinkedIn | `mcporter` | `mcporter call 'linkedin.get_person_profile(...)'` |
 | RSS | `feedparser` | `python3 -c "import feedparser; ..."` |
 
-> For multi-backend platforms, rely on the `active_backend` field from `agent-reach doctor --json`.
+> For multi-backend platforms, rely on the `active_backend` field from `agent-reach-english doctor --json`.

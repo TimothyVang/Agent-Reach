@@ -24,7 +24,7 @@ pipx install 'git+https://github.com/public-clis/rdt-cli.git'
 
 Or install with one command:
 ```bash
-agent-reach install --env=auto --channels=reddit
+agent-reach-english install --env=auto --channels=reddit
 ```
 
 ## Usage Examples
@@ -41,7 +41,7 @@ rdt read POST_ID
 
 ## Steps the User Must Do Manually
 
-None. rdt-cli is installed automatically by `agent-reach install --env=auto`.
+None. rdt-cli is installed automatically by `agent-reach-english install --env=auto`.
 
 ## Fallback: Exa Search
 

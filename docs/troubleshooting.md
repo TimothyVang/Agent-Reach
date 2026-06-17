@@ -2,17 +2,17 @@
 
 ## Xueqiu: API returns 400
 
-**Symptom:** `agent-reach doctor` shows Xueqiu as ⚠️, reporting `HTTP Error 400`
+**Symptom:** `agent-reach-english doctor` shows Xueqiu as ⚠️, reporting `HTTP Error 400`
 
 **Cause:** The Xueqiu API requires login cookies and cannot be accessed anonymously.
 
 **Solution:** Log into xueqiu.com in Chrome, then run:
 
 ```bash
-agent-reach configure --from-browser chrome
+agent-reach-english configure --from-browser chrome
 ```
 
-Run `agent-reach doctor` again to confirm it's back to ✅. When the cookies expire, just run it again.
+Run `agent-reach-english doctor` again to confirm it's back to ✅. When the cookies expire, just run it again.
 
 ---
 

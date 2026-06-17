@@ -23,7 +23,7 @@ xhs login
 
 ### 3. Verify
 ```bash
-agent-reach doctor
+agent-reach-english doctor
 ```
 
 You should see XiaoHongShu shown as ✅.
@@ -37,7 +37,7 @@ If `xhs login` fails to extract automatically, you need to import the cookies ma
 > 1. Install the [Cookie-Editor](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) extension in Chrome
 > 2. Log in to xiaohongshu.com in your browser
 > 3. Click the Cookie-Editor icon → Export → Header String
-> 4. Send the exported string to the Agent and run: `agent-reach configure xhs-cookies "EXPORTED_COOKIE_STRING"`
+> 4. Send the exported string to the Agent and run: `agent-reach-english configure xhs-cookies "EXPORTED_COOKIE_STRING"`
 >
 > **Note**: Do not rely on QR code login; the Cookie-Editor export method is the simplest and most reliable.
 

@@ -50,7 +50,7 @@ dev = [
 ]
 
 [project.scripts]
-agent-reach = "agent_reach.cli:main"
+agent-reach-english = "agent_reach.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/TimothyVang/Agent-Reach"

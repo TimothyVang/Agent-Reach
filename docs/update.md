@@ -29,7 +29,7 @@ Update Agent Reach to the latest version, refresh upstream tools, migrate from r
 ### Step 1: Check current version
 
 ```bash
-agent-reach check-update
+agent-reach-english check-update
 ```
 
 If it says "already on the latest version", skip to Step 4 (verify). Otherwise continue.
@@ -72,7 +72,7 @@ browser session. Offer it once:
 
 > "This update introduces the OpenCLI backend (reuses your browser login session, with zero config for XiaoHongShu/Reddit). Want to install it? Once it's done, you only need to click 'Add extension' once in the Chrome Web Store."
 
-If yes: `agent-reach install --channels opencli` and guide them through the
+If yes: `agent-reach-english install --channels opencli` and guide them through the
 extension click. If no, everything keeps working on existing backends.
 
 ### Step 4: Coexistence (DO NOT uninstall old tools)
@@ -85,11 +85,11 @@ them automatically — removal is the user's call, not yours.
 ### Step 5: Verify
 
 ```bash
-agent-reach version
-agent-reach doctor
+agent-reach-english version
+agent-reach-english doctor
 ```
 
-Running `agent-reach doctor` (text mode) also auto-syncs the bundled skill
+Running `agent-reach-english doctor` (text mode) also auto-syncs the bundled skill
 (SKILL.md + references) into every detected agent skill directory — no
 separate skill-update step is needed.
 
@@ -105,7 +105,7 @@ Check the doctor output:
 
 Tell the user:
 
-1. What version they're on now (`agent-reach version`)
+1. What version they're on now (`agent-reach-english version`)
 2. How many channels are available, and which backend each multi-backend
    platform is using (from doctor)
 3. Anything that needs their action (e.g. Chrome extension click, `xhs login`,

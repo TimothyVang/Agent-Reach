@@ -23,12 +23,12 @@ echo ""
 
 # ── 3. Auto-configure ──
 echo "⚙️  Running install..."
-agent-reach install --env=auto 2>&1
+agent-reach-english install --env=auto 2>&1
 echo ""
 
 # ── 4. Diagnostics ──
 echo "🩺 Running doctor..."
-agent-reach doctor 2>&1
+agent-reach-english doctor 2>&1
 echo ""
 
 # ── 5. Test one by one ──
@@ -55,23 +55,23 @@ test_it() {
 }
 
 echo "📖 Read tests"
-test_it "Web page" agent-reach read "https://example.com"
-test_it "GitHub" agent-reach read "https://github.com/TimothyVang/Agent-Reach"
-test_it "YouTube" agent-reach read "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-test_it "Bilibili" agent-reach read "https://www.bilibili.com/video/BV1d4411N7zD"
-test_it "RSS" agent-reach read "https://hnrss.org/frontpage"
-test_it "Twitter" agent-reach read "https://x.com/elonmusk/status/1893797839927353448"
-test_it "Reddit" agent-reach read "https://www.reddit.com/r/LocalLLaMA/hot"
+test_it "Web page" agent-reach-english read "https://example.com"
+test_it "GitHub" agent-reach-english read "https://github.com/TimothyVang/Agent-Reach"
+test_it "YouTube" agent-reach-english read "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+test_it "Bilibili" agent-reach-english read "https://www.bilibili.com/video/BV1d4411N7zD"
+test_it "RSS" agent-reach-english read "https://hnrss.org/frontpage"
+test_it "Twitter" agent-reach-english read "https://x.com/elonmusk/status/1893797839927353448"
+test_it "Reddit" agent-reach-english read "https://www.reddit.com/r/LocalLLaMA/hot"
 
 echo ""
 echo "🔍 Search tests"
-test_it "Web search" agent-reach search "best AI agent framework" -n 2
-test_it "GitHub search" agent-reach search-github "yt-dlp" -n 2
-test_it "Twitter search" agent-reach search-twitter "AI agent" -n 2
-test_it "Reddit search" agent-reach search-reddit "machine learning" -n 2
-test_it "YouTube search" agent-reach search-youtube "AI tutorial" -n 2
-test_it "Bilibili search" agent-reach search-bilibili "AI" -n 2
-test_it "XiaoHongShu search" agent-reach search-xhs "AI" -n 2
+test_it "Web search" agent-reach-english search "best AI agent framework" -n 2
+test_it "GitHub search" agent-reach-english search-github "yt-dlp" -n 2
+test_it "Twitter search" agent-reach-english search-twitter "AI agent" -n 2
+test_it "Reddit search" agent-reach-english search-reddit "machine learning" -n 2
+test_it "YouTube search" agent-reach-english search-youtube "AI tutorial" -n 2
+test_it "Bilibili search" agent-reach-english search-bilibili "AI" -n 2
+test_it "XiaoHongShu search" agent-reach-english search-xhs "AI" -n 2
 
 echo ""
 echo "════════════════════════════════════════════"

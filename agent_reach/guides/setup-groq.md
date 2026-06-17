@@ -7,7 +7,7 @@ When a YouTube/Bilibili video has no subtitles, Groq's Whisper API is used to tr
 
 1. Check whether it is already configured:
 ```bash
-agent-reach doctor | grep -i "groq\|whisper"
+agent-reach-english doctor | grep -i "groq\|whisper"
 ```
 
 2. If the user provides a key, write it to the config:

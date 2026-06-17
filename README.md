@@ -63,7 +63,7 @@ Update Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/ma
 | 🔒 **Privacy safe** | Cookies stay local — never uploaded, never shared. The code is fully open source and can be audited anytime |
 | 🔄 **Kept up to date** | Every platform routes through a primary + fallback multi-backend list. When an access path dies, we switch to the next one and you don't notice (June 2026 example: yt-dlp was blocked by Bilibili's risk control → switched to bili-cli, zero action on the user's side) |
 | 🤖 **Works with any Agent** | Claude Code, OpenClaw, Cursor, Windsurf… any Agent that can run command-line commands |
-| 🩺 **Built-in diagnostics** | `agent-reach doctor` — one command tells you what works, what doesn't, and how to fix it |
+| 🩺 **Built-in diagnostics** | `agent-reach-english doctor` — one command tells you what works, what doesn't, and how to fix it |
 
 ---
 
@@ -127,14 +127,14 @@ That's the only step. The Agent takes care of everything else on its own.
 <details>
 <summary>What does it do? (click to expand)</summary>
 
-1. **Installs the CLI tool** — `pip install` sets up the `agent-reach` command line (bundles yt-dlp and feedparser)
+1. **Installs the CLI tool** — `pip install` sets up the `agent-reach-english` command line (bundles yt-dlp and feedparser)
 2. **Installs system infrastructure** — automatically detects and installs Node.js, the gh CLI, and mcporter
 3. **Configures the search engine** — connects Exa via MCP (free, no API key needed)
 4. **Detects the environment** — determines whether you're on a local computer or a server, and gives matching configuration advice
 5. **Registers SKILL.md** — installs the usage guide in the Agent's skills directory, so that later, whenever the Agent hits a request like "research the web," "search Twitter," or "watch a video," it automatically knows which upstream tool to call
 6. **Asks whether you want more** — by default it only activates the 6 zero-config channels; for login-required ones like XiaoHongShu, Twitter, and Reddit, the Agent presents a menu and asks which you want, installing only the ones you name
 
-After installation, `agent-reach doctor` — one command — tells you the status of each channel and which path it's currently taking.
+After installation, `agent-reach-english doctor` — one command — tells you the status of each channel and which path it's currently taking.
 </details>
 
 ---
@@ -170,7 +170,7 @@ Every time you set up the environment for a new Agent, you spend time finding to
 
 ### 🔌 Every platform = an ordered backend list (primary + fallbacks)
 
-Switching access paths means reordering the list, not rewriting code. `agent-reach doctor` tells you **which backend each platform is currently using**.
+Switching access paths means reordering the list, not rewriting code. `agent-reach-english doctor` tells you **which backend each platform is currently using**.
 
 ```
 channels/
@@ -204,7 +204,7 @@ Each channel file **actually probes** its candidate backends in order (not just 
 | XiaoHongShu | [OpenCLI](https://github.com/jackwener/opencli) (desktop) | [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp) (server) ▸ xhs-cli | The xhs-cli author moved to OpenCLI (24K stars); browser sessions mean zero friction |
 | LinkedIn | [linkedin-scraper-mcp](https://github.com/stickerdaniel/linkedin-mcp-server) | Jina Reader | MCP service, browser automation |
 
-> 📌 These are the *current* choices, re-verified regularly on real machines. When a path dies we switch to the next — `agent-reach doctor` always tells you which one is active right now.
+> 📌 These are the *current* choices, re-verified regularly on real machines. When a path dies we switch to the next — `agent-reach-english doctor` always tells you which one is active right now.
 
 ---
 
@@ -215,9 +215,9 @@ Agent Reach takes security seriously by design:
 | Measure | Description |
 |------|------|
 | 🔒 **Credentials stored locally** | Cookies and tokens are stored only on your machine at `~/.agent-reach/config.yaml`, with file permissions 600 (owner read/write only); never uploaded, never shared |
-| 🛡️ **Safe mode** | `agent-reach install --safe` won't modify your system automatically — it only lists what's needed and leaves the decision to install up to you |
+| 🛡️ **Safe mode** | `agent-reach-english install --safe` won't modify your system automatically — it only lists what's needed and leaves the decision to install up to you |
 | 👀 **Fully open source** | The code is transparent and can be audited anytime. Every dependency tool is also an open-source project |
-| 🔍 **Dry run** | `agent-reach install --dry-run` previews all operations without making any changes |
+| 🔍 **Dry run** | `agent-reach-english install --dry-run` previews all operations without making any changes |
 | 🧩 **Pluggable architecture** | Don't trust a particular component? Just swap out the corresponding channel file — it won't affect the others |
 
 ### 🍪 Cookie security recommendations
@@ -232,24 +232,24 @@ For platforms that need cookies (Twitter, XiaoHongShu), we recommend using a **d
 
 | Method | Command | Best for |
 |------|------|---------|
-| One-click fully automatic (default) | `agent-reach install --env=auto` | Personal computers, development environments |
-| Safe mode | `agent-reach install --env=auto --safe` | Production servers, shared machines |
-| Preview only | `agent-reach install --env=auto --dry-run` | Seeing what it would do first |
+| One-click fully automatic (default) | `agent-reach-english install --env=auto` | Personal computers, development environments |
+| Safe mode | `agent-reach-english install --env=auto --safe` | Production servers, shared machines |
+| Preview only | `agent-reach-english install --env=auto --dry-run` | Seeing what it would do first |
 
 ### 🗑️ Uninstall
 
 ```bash
-agent-reach uninstall
+agent-reach-english uninstall
 ```
 
 This removes: `~/.agent-reach/` (including all tokens/cookies), each Agent's skill file, and the MCP configuration in mcporter.
 
 ```bash
 # Preview only, don't actually delete
-agent-reach uninstall --dry-run
+agent-reach-english uninstall --dry-run
 
 # Remove only the skill files, keep the token config (for reinstalling)
-agent-reach uninstall --keep-config
+agent-reach-english uninstall --keep-config
 ```
 
 To uninstall the Python package itself: `pip uninstall agent-reach`
@@ -311,13 +311,13 @@ All Reddit access requires a logged-in session (anonymous endpoints are fully bl
 <details>
 <summary><strong>How do I get an AI Agent to read XiaoHongShu?</strong></summary>
 
-On a desktop computer, prefer **OpenCLI** (`agent-reach install --channels opencli`) — it reuses the logged-in session in your browser, so if you've browsed XiaoHongShu it just works, zero config; after installing, click "Add extension" once in the Chrome Web Store. Then the Agent can search with `opencli xiaohongshu search "query"` and read notes with `opencli xiaohongshu note URL`. On a server, use [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp) (bundled headless browser, QR login). Existing xhs-cli users are unaffected — it's still a fallback backend (upstream unmaintained since 2026-03, not recommended for new installs).
+On a desktop computer, prefer **OpenCLI** (`agent-reach-english install --channels opencli`) — it reuses the logged-in session in your browser, so if you've browsed XiaoHongShu it just works, zero config; after installing, click "Add extension" once in the Chrome Web Store. Then the Agent can search with `opencli xiaohongshu search "query"` and read notes with `opencli xiaohongshu note URL`. On a server, use [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp) (bundled headless browser, QR login). Existing xhs-cli users are unaffected — it's still a fallback backend (upstream unmaintained since 2026-03, not recommended for new installs).
 </details>
 
 <details>
 <summary><strong>Compatible with Claude Code / Cursor / OpenClaw / Windsurf?</strong></summary>
 
-Yes! Agent Reach is an installer + configuration tool — any AI coding agent that can run shell commands can use it. Works with Claude Code, Cursor, OpenClaw, Windsurf, Codex, and more. Just `pip install agent-reach`, run `agent-reach install`, and the agent can start using the upstream tools immediately.
+Yes! Agent Reach is an installer + configuration tool — any AI coding agent that can run shell commands can use it. Works with Claude Code, Cursor, OpenClaw, Windsurf, Codex, and more. Just `pip install agent-reach`, run `agent-reach-english install`, and the agent can start using the upstream tools immediately.
 
 **OpenClaw note:** If your OpenClaw is using the default `messaging` tool profile, the agent won't be able to run shell commands. Enable exec first: `openclaw config set tools.profile "coding"` (or set `"tools": { "profile": "coding" }` in `~/.openclaw/openclaw.json`), then restart the Gateway and start a new conversation before installing.
 </details>

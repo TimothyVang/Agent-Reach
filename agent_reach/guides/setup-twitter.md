@@ -39,7 +39,7 @@ twitter search "test" -n 1
 4. Run the configuration command:
 
 ```bash
-agent-reach configure twitter-cookies "PASTED_COOKIE_JSON"
+agent-reach-english configure twitter-cookies "PASTED_COOKIE_JSON"
 ```
 
 This automatically extracts `auth_token` and `ct0` and writes them to environment variables.

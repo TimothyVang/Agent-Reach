@@ -35,7 +35,7 @@ if [ -z "$GROQ_API_KEY" ]; then
         GROQ_API_KEY=$(python3 -c "import yaml; print((yaml.safe_load(open('$CONFIG_FILE')) or {}).get('groq_api_key',''))" 2>/dev/null || true)
     fi
 fi
-GROQ_API_KEY="${GROQ_API_KEY:?Please set the GROQ_API_KEY environment variable or run agent-reach configure groq-key}"
+GROQ_API_KEY="${GROQ_API_KEY:?Please set the GROQ_API_KEY environment variable or run agent-reach-english configure groq-key}"
 
 # Groq API limit: 25MB per file
 MAX_CHUNK_SIZE_MB=20

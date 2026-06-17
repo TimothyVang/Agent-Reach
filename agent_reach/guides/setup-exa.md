@@ -8,7 +8,7 @@ Exa is an AI semantic search engine. It connects via MCP, **free, no API key req
 
 ## Steps the Agent Can Complete Automatically
 
-`agent-reach install --env=auto` performs the following steps automatically, so manual setup is usually not needed.
+`agent-reach-english install --env=auto` performs the following steps automatically, so manual setup is usually not needed.
 
 ### 1. Install mcporter
 ```bash
@@ -22,7 +22,7 @@ mcporter config add exa https://mcp.exa.ai/mcp
 
 ### 3. Verify
 ```bash
-agent-reach doctor | grep "Search"
+agent-reach-english doctor | grep "Search"
 mcporter call 'exa.web_search_exa(query: "test", numResults: 1)'
 ```
 
@@ -30,7 +30,7 @@ mcporter call 'exa.web_search_exa(query: "test", numResults: 1)'
 
 **None.** Exa connects via MCP: free, no sign-up, no API key required.
 
-If `agent-reach install` did not configure Exa automatically due to a network issue, just run the two commands above manually.
+If `agent-reach-english install` did not configure Exa automatically due to a network issue, just run the two commands above manually.
 
 ## FAQ
 

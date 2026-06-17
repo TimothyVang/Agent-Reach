@@ -4,7 +4,7 @@ XiaoHongShu, Twitter/X, Bilibili, V2EX, Reddit.
 
 ## XiaoHongShu (multi-backend)
 
-XiaoHongShu has three backends. **Run `agent-reach doctor --json` first to see which `active_backend` is set for xiaohongshu**, then use the matching command group.
+XiaoHongShu has three backends. **Run `agent-reach-english doctor --json` first to see which `active_backend` is set for xiaohongshu**, then use the matching command group.
 
 ### Backend A: OpenCLI (desktop preferred, reuses the browser login session)
 
@@ -192,7 +192,7 @@ user = ch.get_user("Livid")
 
 ## Reddit (multi-backend, login required)
 
-**Reddit has no zero-config path**: anonymous `.json` endpoints are blocked (403), and official API access has been largely rejected by manual review since 2025-11. Both backends rely on a login session — run `agent-reach doctor --json` first to see Reddit's `active_backend`. Access from mainland China requires a proxy.
+**Reddit has no zero-config path**: anonymous `.json` endpoints are blocked (403), and official API access has been largely rejected by manual review since 2025-11. Both backends rely on a login session — run `agent-reach-english doctor --json` first to see Reddit's `active_backend`. Access from mainland China requires a proxy.
 
 ### Backend A: OpenCLI (desktop preferred, reuses the browser login session)
 

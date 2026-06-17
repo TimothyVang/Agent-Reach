@@ -43,12 +43,12 @@ yt-dlp --dump-json "ytsearch5:query"
 
 ```bash
 # Fallback when a video has no subtitles: download the audio and transcribe with Whisper (a free Groq key works)
-agent-reach transcribe "https://www.youtube.com/watch?v=VIDEO_ID"
-agent-reach transcribe ./local_audio.mp3 -o /tmp/transcript.txt
+agent-reach-english transcribe "https://www.youtube.com/watch?v=VIDEO_ID"
+agent-reach-english transcribe ./local_audio.mp3 -o /tmp/transcript.txt
 ```
 
-> Configure a key first: `agent-reach configure groq-key gsk_xxx` (free, console.groq.com)
-> or `agent-reach configure openai-key sk-xxx`. Default auto mode: if groq fails, it automatically falls back to openai.
+> Configure a key first: `agent-reach-english configure groq-key gsk_xxx` (free, console.groq.com)
+> or `agent-reach-english configure openai-key sk-xxx`. Default auto mode: if groq fails, it automatically falls back to openai.
 
 ## Bilibili (bili-cli primary, OpenCLI for subtitles)
 
@@ -67,7 +67,7 @@ bili search "query" --type video -n 5
 bili hot -n 10
 bili rank -n 10
 
-# Download audio and split into ASR-ready WAV (pair with agent-reach transcribe when there are no subtitles)
+# Download audio and split into ASR-ready WAV (pair with agent-reach-english transcribe when there are no subtitles)
 bili audio BVxxx
 ```
 
@@ -108,13 +108,13 @@ curl -s -b /tmp/bili_ck.txt -A "$UA" -e "https://www.bilibili.com/" \
 
 1. **ffmpeg**: `brew install ffmpeg`
 2. **Groq API Key** (free): https://console.groq.com/keys
-3. **Configure key**: `agent-reach configure groq-key YOUR_KEY`
-4. **First run**: `agent-reach install --env=auto` to install the tools
+3. **Configure key**: `agent-reach-english configure groq-key YOUR_KEY`
+4. **First run**: `agent-reach-english install --env=auto` to install the tools
 
 ### Check status
 
 ```bash
-agent-reach doctor
+agent-reach-english doctor
 ```
 
 > Output Markdown files are saved to `/tmp/` by default.
@@ -127,4 +127,4 @@ agent-reach doctor
 | Bilibili video details / search | bili-cli |
 | Bilibili subtitles | opencli bilibili subtitle |
 | Podcast transcription | Xiaoyuzhou transcribe.sh |
-| Audio/video without subtitles | agent-reach transcribe (for Bilibili audio, run `bili audio` first) |
+| Audio/video without subtitles | agent-reach-english transcribe (for Bilibili audio, run `bili audio` first) |

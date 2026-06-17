@@ -12,7 +12,7 @@ description: >
   Xueqiu/stock quotes, RSS feeds, or any web URL.
 
   13 platforms, multi-backend routing (OpenCLI / per-platform CLIs / APIs).
-  Zero config for 6 channels. Run `agent-reach doctor --json` to see which
+  Zero config for 6 channels. Run `agent-reach-english doctor --json` to see which
   backend serves each platform right now.
 
   NOT for: writing reports / data analysis / translation and other content
@@ -51,12 +51,12 @@ metadata:
 ## Standing Rules (apply for the whole session)
 
 1. **Health-check before acting**: for multi-backend platforms (XiaoHongShu/Reddit/Bilibili/Twitter), run
-   `agent-reach doctor --json` first and pick the command group matching each platform's `active_backend` field.
+   `agent-reach-english doctor --json` first and pick the command group matching each platform's `active_backend` field.
 2. **Announce what you use**: before starting, say "using agent-reach, platform X / backend Y".
 3. **On failure, follow the retry chains in references/** — never guess commands.
 4. **Broad research tasks**: combine multiple platforms (Exa search + Twitter/Reddit for discussions + XiaoHongShu/Bilibili for Chinese-language context), collect in parallel, then synthesize.
 5. **Watch versions for the user**: after finishing a larger research / multi-platform task, run
-   `agent-reach check-update` (fast, one API call). If a new version exists, append one line to your wrap-up:
+   `agent-reach-english check-update` (fast, one API call). If a new version exists, append one line to your wrap-up:
    "Agent Reach vX.Y.Z is available — just paste this to me to update: help me update Agent Reach:
    https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md".
    Do not interrupt the current task to update, and do not repeat the reminder for the same version.
@@ -112,7 +112,7 @@ opencli xiaohongshu search "query" -f yaml
 
 ```bash
 # Check available channels and the currently active backend for each platform
-agent-reach doctor --json
+agent-reach-english doctor --json
 ```
 
 ## Workspace Rules

@@ -69,11 +69,11 @@ All significant changes to this project are recorded in this file.
 ### 📈 Improvements
 
 - Channel count: 9 → 12
-- `agent-reach doctor` now detects all 12 channels
+- `agent-reach-english doctor` now detects all 12 channels
 - CLI: added `search-linkedin`, `search-bosszhipin` subcommands
 - Updated install guide with setup instructions for new channels
 - Channel count: 9 → 11
-- `agent-reach doctor` now detects all 11 channels
+- `agent-reach-english doctor` now detects all 11 channels
 - CLI: added `search-linkedin` and `search-bosszhipin` subcommands
 - Added channel configuration instructions to the install guide
 
@@ -87,11 +87,11 @@ All significant changes to this project are recorded in this file.
 - CLI with `read`, `search`, `doctor`, `install` commands
 - Unified channel interface — each platform is a single pluggable Python file
 - Auto-detection of local vs server environments
-- Built-in diagnostics via `agent-reach doctor`
+- Built-in diagnostics via `agent-reach-english doctor`
 - Skill registration for Claude Code / OpenClaw / Cursor
 - 9 channels: Web, Twitter/X, YouTube, Bilibili, GitHub, Reddit, XiaoHongShu, RSS, Exa Search
 - CLI supports the `read`, `search`, `doctor`, and `install` commands
 - Unified channel interface — each platform is a standalone, pluggable Python file
 - Automatic detection of local vs server environments
-- Built-in diagnostics via `agent-reach doctor`
+- Built-in diagnostics via `agent-reach-english doctor`
 - Skill registration support for Claude Code / OpenClaw / Cursor
