@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-green.svg?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+"></a>
-  <a href="https://github.com/Panniantong/agent-reach/stargazers"><img src="https://img.shields.io/github/stars/Panniantong/agent-reach?style=for-the-badge" alt="GitHub Stars"></a>
+  <a href="https://github.com/TimothyVang/Agent-Reach/stargazers"><img src="https://img.shields.io/github/stars/TimothyVang/Agent-Reach?style=for-the-badge" alt="GitHub Stars"></a>
   <a href="https://trendshift.io/repositories/24387"><img src="https://trendshift.io/api/badge/repositories/24387" alt="Trendshift GitHub Trending #1 Repository of the Day"></a>
 </p>
 
@@ -42,7 +42,7 @@ Every platform has its own barriers: paid APIs, blocks to bypass, accounts to lo
 **Agent Reach turns this into one sentence:**
 
 ```
-Install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+Install Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/install.md
 ```
 
 Copy that to your Agent, and a few minutes later it can read tweets, search Reddit, watch YouTube, and browse XiaoHongShu.
@@ -50,7 +50,7 @@ Copy that to your Agent, and a few minutes later it can read tweets, search Redd
 **Already installed? Updating is also one sentence:**
 
 ```
-Update Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md
+Update Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md
 ```
 
 > ⭐ **Star this project** and we'll keep tracking changes across platforms and adding new channels. You don't have to watch it yourself — when a platform blocks us we fix it, and when there's a new channel we add it.
@@ -108,19 +108,19 @@ Update Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/ma
 Copy this sentence to your AI Agent (Claude Code, OpenClaw, Cursor, etc.):
 
 ```
-Install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+Install Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/install.md
 ```
 
 That's the only step. The Agent takes care of everything else on its own.
 
 > 🔄 **Already installed?** Updating is also one sentence:
 > ```
-> Update Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md
+> Update Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md
 > ```
 
 > 🛡️ **Worried about security?** You can use safe mode — it won't auto-install system packages, it only tells you what you need:
 > ```
-> Install Agent Reach (safe mode): https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+> Install Agent Reach (safe mode): https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/install.md
 > Use the --safe flag during install
 > ```
 
@@ -258,13 +258,13 @@ To uninstall the Python package itself: `pip uninstall agent-reach`
 
 ## Contributing
 
-This project was entirely vibe-coded 🎸 There might be some rough edges here and there, so please bear with me if you run into problems. If you hit a bug, don't hesitate to open an [Issue](https://github.com/Panniantong/agent-reach/issues) — I'll fix it as soon as I can.
+This project was entirely vibe-coded 🎸 There might be some rough edges here and there, so please bear with me if you run into problems. If you hit a bug, don't hesitate to open an [Issue](https://github.com/TimothyVang/Agent-Reach/issues) — I'll fix it as soon as I can.
 
 **Want a new channel?** Open an Issue to tell us, or submit a PR yourself.
 
 **Want to add one locally?** Just have your Agent clone the repo and modify it — each channel is a single standalone file, so adding one is simple.
 
-[PRs](https://github.com/Panniantong/agent-reach/pulls) are always welcome!
+[PRs](https://github.com/TimothyVang/Agent-Reach/pulls) are always welcome!
 
 ---
 
@@ -345,7 +345,7 @@ To chat or collaborate, add me on WeChat and I'll invite you to the community gr
   <img src="docs/wechat-group-qr.jpg" width="280" alt="WeChat QR">
 </p>
 
-> For bug reports and feature requests, please use [GitHub Issues](https://github.com/Panniantong/Agent-Reach/issues) — easier to track.
+> For bug reports and feature requests, please use [GitHub Issues](https://github.com/TimothyVang/Agent-Reach/issues) — easier to track.
 
 ## License
 
@@ -359,4 +359,4 @@ To chat or collaborate, add me on WeChat and I'll invite you to the community gr
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Panniantong/Agent-Reach&type=Date&v=20260309)](https://star-history.com/#Panniantong/Agent-Reach&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=TimothyVang/Agent-Reach&type=Date&v=20260309)](https://star-history.com/#TimothyVang/Agent-Reach&Date)

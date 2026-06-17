@@ -18,7 +18,7 @@ source "$TEST_DIR/venv/bin/activate"
 
 # ── 2. Install ──
 echo "📥 Installing from GitHub..."
-pip install -q https://github.com/Panniantong/agent-reach/archive/main.zip 2>&1 | tail -1
+pip install -q https://github.com/TimothyVang/Agent-Reach/archive/main.zip 2>&1 | tail -1
 echo ""
 
 # ── 3. Auto-configure ──
@@ -56,7 +56,7 @@ test_it() {
 
 echo "📖 Read tests"
 test_it "Web page" "agent-reach read 'https://example.com'"
-test_it "GitHub" "agent-reach read 'https://github.com/Panniantong/agent-reach'"
+test_it "GitHub" "agent-reach read 'https://github.com/TimothyVang/Agent-Reach'"
 test_it "YouTube" "agent-reach read 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'"
 test_it "Bilibili" "agent-reach read 'https://www.bilibili.com/video/BV1d4411N7zD'"
 test_it "RSS" "agent-reach read 'https://hnrss.org/frontpage'"

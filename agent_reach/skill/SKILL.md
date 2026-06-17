@@ -41,7 +41,7 @@ triggers:
   - finance: Xueqiu/stock/stock/xueqiu/quotes/fund
 metadata:
   openclaw:
-    homepage: https://github.com/Panniantong/Agent-Reach
+    homepage: https://github.com/TimothyVang/Agent-Reach
 ---
 
 # Agent Reach — Internet Capability Router
@@ -58,7 +58,7 @@ metadata:
 5. **Watch versions for the user**: after finishing a larger research / multi-platform task, run
    `agent-reach check-update` (fast, one API call). If a new version exists, append one line to your wrap-up:
    "Agent Reach vX.Y.Z is available — just paste this to me to update: help me update Agent Reach:
-   https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md".
+   https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md".
    Do not interrupt the current task to update, and do not repeat the reminder for the same version.
 
 ## Routing Table
@@ -133,6 +133,6 @@ Based on the user's needs, read the matching reference doc:
 ## Configure a Channel
 
 If a channel needs configuration, fetch the install guide:
-https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/install.md
 
 The user only needs to provide cookies; the agent handles the rest of the configuration.

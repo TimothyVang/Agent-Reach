@@ -333,7 +333,7 @@ def _cmd_install(args):
         # Star reminder
         print()
         print("If Agent Reach helped you, give it a Star so more people can find it:")
-        print("   https://github.com/Panniantong/Agent-Reach")
+        print("   https://github.com/TimothyVang/Agent-Reach")
         print("   It takes one second and means a lot to an indie developer. Thank you!")
     else:
         print()
@@ -1631,9 +1631,9 @@ def _github_get_with_retry(url, timeout=10, retries=3, sleeper=time.sleep):
 #: agent through all three (docs/update.md); bare pip only updates the package.
 _UPDATE_INSTRUCTIONS = (
     "How to update (recommended: copy this line to your AI agent, it fully updates the package + upstream tools + skill):\n"
-    "  Update Agent Reach for me: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md\n"
+    "  Update Agent Reach for me: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md\n"
     "Update the package only (without upstream tools and the skill):\n"
-    "  pip install --upgrade https://github.com/Panniantong/agent-reach/archive/main.zip"
+    "  pip install --upgrade https://github.com/TimothyVang/Agent-Reach/archive/main.zip"
 )
 
 
@@ -1661,8 +1661,8 @@ def _cmd_check_update():
     from agent_reach import __version__
 
     print(f"Current version: v{__version__}")
-    release_url = "https://api.github.com/repos/Panniantong/Agent-Reach/releases/latest"
-    commit_url = "https://api.github.com/repos/Panniantong/Agent-Reach/commits/main"
+    release_url = "https://api.github.com/repos/TimothyVang/Agent-Reach/releases/latest"
+    commit_url = "https://api.github.com/repos/TimothyVang/Agent-Reach/commits/main"
 
     # Fetch latest release with retry/backoff.
     resp, err, attempts = _github_get_with_retry(release_url, timeout=10, retries=3)
@@ -1747,7 +1747,7 @@ def _cmd_watch():
     new_version = ""
     release_body = ""
     resp, err, _attempts = _github_get_with_retry(
-        "https://api.github.com/repos/Panniantong/Agent-Reach/releases/latest",
+        "https://api.github.com/repos/TimothyVang/Agent-Reach/releases/latest",
         timeout=10,
         retries=2,
     )
@@ -1780,7 +1780,7 @@ def _cmd_watch():
             for line in release_body.strip().split("\n")[:10]:
                 print(f"    {line}")
         print("  Update (send this one line to your agent for a full update):")
-        print("    Update Agent Reach for me: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md")
+        print("    Update Agent Reach for me: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md")
 
 
 if __name__ == "__main__":

@@ -5,12 +5,12 @@
 Copy this to your AI Agent:
 
 ```
-Help me install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+Help me install Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/install.md
 ```
 
 > 🛡️ **Security-conscious?** Use safe mode — it won't auto-install system packages:
 > ```
-> Help me install Agent Reach (safe mode): https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+> Help me install Agent Reach (safe mode): https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/install.md
 > Use the --safe flag during installation
 > ```
 
@@ -50,14 +50,14 @@ All Agent Reach files go in dedicated directories — **never in the agent works
 
 ```bash
 # Recommended: pipx (the easiest option)
-pipx install https://github.com/Panniantong/agent-reach/archive/main.zip
+pipx install https://github.com/TimothyVang/Agent-Reach/archive/main.zip
 agent-reach install --env=auto
 
 # If your Python comes from Homebrew, or you hit PEP 668 (externally-managed-environment),
 # install inside a virtual environment:
 python3 -m venv ~/.agent-reach-venv
 source ~/.agent-reach-venv/bin/activate
-pip install https://github.com/Panniantong/agent-reach/archive/main.zip
+pip install https://github.com/TimothyVang/Agent-Reach/archive/main.zip
 agent-reach install --env=auto
 ```
 
@@ -71,7 +71,7 @@ agent-reach install --env=auto
 > ```powershell
 > py -3 -m venv $env:USERPROFILE\.agent-reach-venv
 > $env:USERPROFILE\.agent-reach-venv\Scripts\Activate.ps1
-> python -m pip install https://github.com/Panniantong/agent-reach/archive/main.zip
+> python -m pip install https://github.com/TimothyVang/Agent-Reach/archive/main.zip
 > agent-reach install --env=auto
 > ```
 
@@ -294,7 +294,7 @@ If the user agrees, create a **cron job** (daily, `sessionTarget: "isolated"`, `
 Run the agent-reach watch command.
 If the output contains "all good", do not notify the user — end silently.
 If the output contains problems (❌ ⚠️) or a new version (🆕), send the full report to the user along with a suggested fix.
-If a new version is available, ask the user whether they want to upgrade (sending this sentence to the user's agent will perform a full update: Help me update Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md).
+If a new version is available, ask the user whether they want to upgrade (sending this sentence to the user's agent will perform a full update: Help me update Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md).
 ```
 
 If the user wants a different agent to handle it, let them choose.
