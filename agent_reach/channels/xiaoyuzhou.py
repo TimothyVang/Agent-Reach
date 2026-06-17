@@ -40,7 +40,7 @@ class XiaoyuzhouChannel(Channel):
         if not os.path.isfile(script):
             return "off", (
                 "Transcription script not installed. Run:\n"
-                "  agent-reach install --env=auto\n"
+                "  agent-reach-english install --env=auto\n"
                 "  or manually copy transcribe.sh to ~/.agent-reach/tools/xiaoyuzhou/"
             )
 
@@ -56,7 +56,7 @@ class XiaoyuzhouChannel(Channel):
             return "warn", (
                 "Requires a Groq API key (free). Steps:\n"
                 "  1. Register at https://console.groq.com\n"
-                "  2. Run: agent-reach configure groq-key gsk_xxxxx"
+                "  2. Run: agent-reach-english configure groq-key gsk_xxxxx"
             )
 
         self.active_backend = "groq-whisper"

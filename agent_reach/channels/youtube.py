@@ -52,7 +52,7 @@ class YouTubeChannel(Channel):
         if not has_js:
             return "warn", (
                 "yt-dlp installed but missing JS runtime (required for YouTube).\n"
-                "  Install Node.js or deno, then run: agent-reach install"
+                "  Install Node.js or deno, then run: agent-reach-english install"
             )
         # Check yt-dlp config for --js-runtimes
         # Deno works out of the box; Node.js requires explicit config

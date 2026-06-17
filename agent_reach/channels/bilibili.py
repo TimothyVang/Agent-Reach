@@ -76,7 +76,7 @@ class BilibiliChannel(Channel):
         return "off", (
             "No usable Bilibili backend (the search API is also unreachable, possibly a network issue). Recommended:\n"
             "  pipx install bilibili-cli (search/trending/video details, no login needed)\n"
-            "  or install OpenCLI on desktop (additionally unlocks subtitles): agent-reach install --channels opencli"
+            "  or install OpenCLI on desktop (additionally unlocks subtitles): agent-reach-english install --channels opencli"
         )
 
     def _check_bili_cli(self):

@@ -175,7 +175,7 @@ class XueqiuChannel(Channel):
         except Exception as e:
             return "warn", (
                 f"Xueqiu API connection failed: {e}. "
-                "Log into Xueqiu first, then run: agent-reach configure --from-browser chrome"
+                "Log into Xueqiu first, then run: agent-reach-english configure --from-browser chrome"
             )
 
     # ------------------------------------------------------------------ #

@@ -175,7 +175,7 @@ def transcribe_chunk(
     if not key:
         raise NoProviderConfigured(
             f"{provider}: missing {PROVIDERS[provider]['key_field']} "
-            f"(configure with `agent-reach configure {provider}-key ...`)"
+            f"(configure with `agent-reach-english configure {provider}-key ...`)"
         )
 
     info = PROVIDERS[provider]

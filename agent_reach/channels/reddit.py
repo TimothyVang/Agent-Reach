@@ -70,7 +70,7 @@ class RedditChannel(Channel):
         return "off", (
             "No Reddit backend installed. Note: Reddit has no zero-config path "
             "(anonymous .json is blocked, the official API requires manual approval), so a login session is required. Recommended:\n"
-            "  Desktop: agent-reach install --channels opencli\n"
+            "  Desktop: agent-reach-english install --channels opencli\n"
             "       (reuses the Chrome login session; works if you've logged into reddit.com)\n"
             f"  Server/existing: pipx install '{_RDT_GIT_SOURCE}'\n"
             "       then `rdt login` or write the cookie manually (see doctor hints)\n"

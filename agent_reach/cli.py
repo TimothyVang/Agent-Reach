@@ -3,10 +3,10 @@
 Agent Reach CLI — installer, doctor, and configuration tool.
 
 Usage:
-    agent-reach install --env=auto
-    agent-reach doctor
-    agent-reach configure twitter-cookies "auth_token=xxx; ct0=yyy"
-    agent-reach setup
+    agent-reach-english install --env=auto
+    agent-reach-english doctor
+    agent-reach-english configure twitter-cookies "auth_token=xxx; ct0=yyy"
+    agent-reach-english setup
 """
 
 import sys
@@ -51,7 +51,7 @@ def main():
     _ensure_utf8_console()
 
     parser = argparse.ArgumentParser(
-        prog="agent-reach",
+        prog="agent-reach-english",
         description="Give your AI Agent eyes to see the entire internet",
     )
     parser.add_argument("-v", "--verbose", action="store_true", help="Show debug logs")
@@ -302,7 +302,7 @@ def _cmd_install(args):
         print()
         print("Tip: Some platforms apply risk controls to server IPs.")
         print("   Reddit requires a login session (rdt-cli + cookie, see the doctor hints); networks in mainland China also need a proxy.")
-        print("   Save a proxy for the agent to use: agent-reach configure proxy http://user:pass@ip:port")
+        print("   Save a proxy for the agent to use: agent-reach-english configure proxy http://user:pass@ip:port")
         print("   Cheap option: https://www.webshare.io ($1/month)")
 
     # Test channels
@@ -327,8 +327,8 @@ def _cmd_install(args):
             # First install — hint about optional channels
             print()
             print("More channels available! Use --channels to install:")
-            print("   agent-reach install --channels=twitter,xiaohongshu,reddit,...")
-            print("   agent-reach install --channels=all  (install everything)")
+            print("   agent-reach-english install --channels=twitter,xiaohongshu,reddit,...")
+            print("   agent-reach-english install --channels=all  (install everything)")
 
         # Star reminder
         print()
@@ -670,7 +670,7 @@ def _install_xiaoyuzhou_deps():
         print("  ✅ Groq API key configured")
     else:
         print("  -- Groq API key not set. Get free key at https://console.groq.com")
-        print("     Then run: agent-reach configure groq-key gsk_xxxxx")
+        print("     Then run: agent-reach-english configure groq-key gsk_xxxxx")
 
 
 def _install_twitter_deps():
@@ -714,7 +714,7 @@ def _install_xhs_deps():
         print("       (we suggest placing it under ~/.agent-reach/tools/)")
         print("    2. Start the service (the first run downloads a ~150MB browser, please wait for it to finish)")
         print("    3. After QR-code login, connect it: mcporter config add xiaohongshu http://localhost:18060/mcp")
-        print("    4. Verify: agent-reach doctor")
+        print("    4. Verify: agent-reach-english doctor")
         return
 
     _install_opencli_deps()
@@ -1017,15 +1017,15 @@ def _cmd_configure(args):
 
         print()
         if found_any:
-            print("✅ Cookies configured! Run `agent-reach doctor` to see updated status.")
+            print("✅ Cookies configured! Run `agent-reach-english doctor` to see updated status.")
         else:
             print(f"No cookies found. Make sure you're logged into the platforms in {browser}.")
         return
 
     # ── Manual configure ──
     if not args.key:
-        print("Usage: agent-reach configure <key> <value>")
-        print("   or: agent-reach configure --from-browser chrome")
+        print("Usage: agent-reach-english configure <key> <value>")
+        print("   or: agent-reach-english configure --from-browser chrome")
         return
 
     value = " ".join(args.value) if args.value else ""
@@ -1082,8 +1082,8 @@ def _cmd_configure(args):
         else:
             print("[X] Could not find auth_token and ct0 in your input.")
             print("   Accepted formats:")
-            print("   1. agent-reach configure twitter-cookies AUTH_TOKEN CT0")
-            print('   2. agent-reach configure twitter-cookies "auth_token=xxx; ct0=yyy; ..."')
+            print("   1. agent-reach-english configure twitter-cookies AUTH_TOKEN CT0")
+            print('   2. agent-reach-english configure twitter-cookies "auth_token=xxx; ct0=yyy; ..."')
 
     elif args.key == "youtube-cookies":
         config.set("youtube_cookies_from", value)
@@ -1164,7 +1164,7 @@ def _configure_xhs_cookies(value):
     value = value.strip()
     if not value:
         print("[X] Missing cookie value.")
-        print("   Usage: agent-reach configure xhs-cookies '<cookie JSON or header string>'")
+        print("   Usage: agent-reach-english configure xhs-cookies '<cookie JSON or header string>'")
         return
 
     # Detect format and parse
@@ -1546,7 +1546,7 @@ def _cmd_setup():
     # Summary
     print("=" * 40)
     print(f"✅ Configuration saved to {config.config_path}")
-    print("Run agent-reach doctor to see the full status")
+    print("Run agent-reach-english doctor to see the full status")
     print()
 
 

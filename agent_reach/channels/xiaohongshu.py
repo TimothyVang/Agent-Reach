@@ -189,7 +189,7 @@ class XiaoHongShuChannel(Channel):
 
         return "off", (
             "No XiaoHongShu backend installed. Recommended:\n"
-            "  Desktop: agent-reach install --channels opencli\n"
+            "  Desktop: agent-reach-english install --channels opencli\n"
             "       (reuses the Chrome login session; zero-config if you've browsed XiaoHongShu)\n"
             f"  Server: xiaohongshu-mcp (bundled headless browser + QR-code login): {_MCP_INSTALL_URL}"
         )

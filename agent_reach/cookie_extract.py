@@ -5,7 +5,7 @@ Supports: Chrome, Firefox, Edge, Brave, Opera
 Extracts: Twitter, XiaoHongShu, Bilibili cookies in one shot.
 
 Usage:
-    agent-reach configure --from-browser chrome
+    agent-reach-english configure --from-browser chrome
 """
 
 import sys
