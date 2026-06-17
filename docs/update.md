@@ -37,12 +37,12 @@ If it says "already on the latest version", skip to Step 4 (verify). Otherwise c
 ### Step 2: Update Agent Reach package
 
 ```bash
-pip install --upgrade https://github.com/TimothyVang/Agent-Reach/archive/main.zip
+pip install --upgrade https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip
 ```
 
 > If pip complains about `externally-managed-environment` (PEP 668), the user
 > originally installed via pipx or a venv — use the matching command:
-> `pipx install --force https://github.com/TimothyVang/Agent-Reach/archive/main.zip`
+> `pipx install --force https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip`
 > or activate `~/.agent-reach-venv` first.
 
 ### Step 3: Refresh upstream tools

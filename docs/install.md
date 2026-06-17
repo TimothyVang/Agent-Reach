@@ -50,14 +50,14 @@ All Agent Reach files go in dedicated directories — **never in the agent works
 
 ```bash
 # Recommended: pipx (the easiest option)
-pipx install https://github.com/TimothyVang/Agent-Reach/archive/main.zip
+pipx install https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip
 agent-reach install --env=auto
 
 # If your Python comes from Homebrew, or you hit PEP 668 (externally-managed-environment),
 # install inside a virtual environment:
 python3 -m venv ~/.agent-reach-venv
 source ~/.agent-reach-venv/bin/activate
-pip install https://github.com/TimothyVang/Agent-Reach/archive/main.zip
+pip install https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip
 agent-reach install --env=auto
 ```
 
@@ -71,7 +71,7 @@ agent-reach install --env=auto
 > ```powershell
 > py -3 -m venv $env:USERPROFILE\.agent-reach-venv
 > $env:USERPROFILE\.agent-reach-venv\Scripts\Activate.ps1
-> python -m pip install https://github.com/TimothyVang/Agent-Reach/archive/main.zip
+> python -m pip install https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip
 > agent-reach install --env=auto
 > ```
 

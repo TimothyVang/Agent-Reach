@@ -18,7 +18,7 @@ source "$TEST_DIR/venv/bin/activate"
 
 # ── 2. Install ──
 echo "📥 Installing from GitHub..."
-pip install -q https://github.com/TimothyVang/Agent-Reach/archive/main.zip 2>&1 | tail -1
+pip install -q https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip 2>&1 | tail -1
 echo ""
 
 # ── 3. Auto-configure ──
@@ -40,7 +40,7 @@ test_it() {
     local name="$1"
     shift
     echo -n "  $name ... "
-    output=$(eval "$@" 2>&1) || true
+    output=$("$@" 2>&1) || true
     if echo "$output" | grep -q "📖\|🔗\|http"; then
         echo "✅"
         PASS=$((PASS+1))
@@ -55,23 +55,23 @@ test_it() {
 }
 
 echo "📖 Read tests"
-test_it "Web page" "agent-reach read 'https://example.com'"
-test_it "GitHub" "agent-reach read 'https://github.com/TimothyVang/Agent-Reach'"
-test_it "YouTube" "agent-reach read 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'"
-test_it "Bilibili" "agent-reach read 'https://www.bilibili.com/video/BV1d4411N7zD'"
-test_it "RSS" "agent-reach read 'https://hnrss.org/frontpage'"
-test_it "Twitter" "agent-reach read 'https://x.com/elonmusk/status/1893797839927353448'"
-test_it "Reddit" "agent-reach read 'https://www.reddit.com/r/LocalLLaMA/hot'"
+test_it "Web page" agent-reach read "https://example.com"
+test_it "GitHub" agent-reach read "https://github.com/TimothyVang/Agent-Reach"
+test_it "YouTube" agent-reach read "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+test_it "Bilibili" agent-reach read "https://www.bilibili.com/video/BV1d4411N7zD"
+test_it "RSS" agent-reach read "https://hnrss.org/frontpage"
+test_it "Twitter" agent-reach read "https://x.com/elonmusk/status/1893797839927353448"
+test_it "Reddit" agent-reach read "https://www.reddit.com/r/LocalLLaMA/hot"
 
 echo ""
 echo "🔍 Search tests"
-test_it "Web search" "agent-reach search 'best AI agent framework' -n 2"
-test_it "GitHub search" "agent-reach search-github 'yt-dlp' -n 2"
-test_it "Twitter search" "agent-reach search-twitter 'AI agent' -n 2"
-test_it "Reddit search" "agent-reach search-reddit 'machine learning' -n 2"
-test_it "YouTube search" "agent-reach search-youtube 'AI tutorial' -n 2"
-test_it "Bilibili search" "agent-reach search-bilibili 'AI' -n 2"
-test_it "XiaoHongShu search" "agent-reach search-xhs 'AI' -n 2"
+test_it "Web search" agent-reach search "best AI agent framework" -n 2
+test_it "GitHub search" agent-reach search-github "yt-dlp" -n 2
+test_it "Twitter search" agent-reach search-twitter "AI agent" -n 2
+test_it "Reddit search" agent-reach search-reddit "machine learning" -n 2
+test_it "YouTube search" agent-reach search-youtube "AI tutorial" -n 2
+test_it "Bilibili search" agent-reach search-bilibili "AI" -n 2
+test_it "XiaoHongShu search" agent-reach search-xhs "AI" -n 2
 
 echo ""
 echo "════════════════════════════════════════════"

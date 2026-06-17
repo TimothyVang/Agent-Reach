@@ -552,25 +552,39 @@ def _install_system_deps():
     else:
         print("  Installing Node.js...")
         try:
-            # Use NodeSource setup script without invoking a shell pipeline.
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".sh") as tf:
-                script_path = tf.name
+            # Prefer the distro package manager — no remote script execution.
             subprocess.run(
-                ["curl", "-fsSL", "https://deb.nodesource.com/setup_22.x", "-o", script_path],
-                capture_output=True, timeout=60,
+                ["apt-get", "install", "-y", "-qq", "nodejs", "npm"],
+                capture_output=True, timeout=180,
             )
-            subprocess.run(
-                ["bash", script_path],
-                capture_output=True, timeout=120,
-            )
-            try:
-                os.unlink(script_path)
-            except Exception:
-                pass
-            subprocess.run(
-                ["apt-get", "install", "-y", "-qq", "nodejs"],
-                capture_output=True, timeout=120,
-            )
+            if not (shutil.which("node") and shutil.which("npm")):
+                # Distro Node missing/too old: fall back to NodeSource. Their
+                # setup script changes over time, so a fixed checksum is not
+                # viable; instead fetch it over HTTPS from the official host and
+                # sanity-check the body (non-empty + shell shebang) before
+                # executing — a guard against a truncated/tampered/HTML-error
+                # download being run. Still a trust decision about NodeSource,
+                # but now only reached when the distro lacks Node.
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".sh") as tf:
+                    script_path = tf.name
+                subprocess.run(
+                    ["curl", "-fsSL", "https://deb.nodesource.com/setup_22.x", "-o", script_path],
+                    capture_output=True, timeout=60,
+                )
+                with open(script_path, "r", encoding="utf-8", errors="replace") as fh:
+                    head = fh.read(64)
+                if head.startswith("#!") and os.path.getsize(script_path) > 1024:
+                    subprocess.run(["bash", script_path], capture_output=True, timeout=120)
+                    subprocess.run(
+                        ["apt-get", "install", "-y", "-qq", "nodejs"],
+                        capture_output=True, timeout=120,
+                    )
+                else:
+                    print("  [!]  Skipped NodeSource setup script (unexpected content)")
+                try:
+                    os.unlink(script_path)
+                except Exception:
+                    pass
             if shutil.which("node"):
                 print("  ✅ Node.js installed")
             else:
@@ -884,7 +898,7 @@ def _install_mcporter():
         # Check for npm/npx
         if not shutil.which("npm") and not shutil.which("npx"):
             print("  [!]  mcporter requires Node.js. Install Node.js first:")
-            print("     https://nodejs.org/ or: curl -fsSL https://fnm.vercel.app/install | bash")
+            print("     Install Node.js: apt install nodejs npm (Linux) / brew install node (macOS) / nvm install 22, or https://nodejs.org/")
             return
         try:
             subprocess.run(
@@ -1633,7 +1647,7 @@ _UPDATE_INSTRUCTIONS = (
     "How to update (recommended: copy this line to your AI agent, it fully updates the package + upstream tools + skill):\n"
     "  Update Agent Reach for me: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/main/docs/update.md\n"
     "Update the package only (without upstream tools and the skill):\n"
-    "  pip install --upgrade https://github.com/TimothyVang/Agent-Reach/archive/main.zip"
+    "  pip install --upgrade https://github.com/TimothyVang/Agent-Reach/archive/refs/tags/v1.5.0.zip"
 )
 
 
