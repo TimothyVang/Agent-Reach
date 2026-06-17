@@ -14,15 +14,13 @@ from agent_reach.cli import _install_skill, _uninstall_skill
 class TestSkillCommand(unittest.TestCase):
     """Test skill install and uninstall via CLI helpers."""
 
-    def test_skill_resources_include_both_locales(self):
-        """Package resources should expose both default and English skill markdown files."""
+    def test_skill_resource_present(self):
+        """Package resources should expose the canonical English skill markdown file."""
         skill_dir = importlib.resources.files("agent_reach").joinpath("skill")
 
-        default_skill = skill_dir.joinpath("SKILL.md").read_text(encoding="utf-8")
-        english_skill = skill_dir.joinpath("SKILL_en.md").read_text(encoding="utf-8")
+        skill = skill_dir.joinpath("SKILL.md").read_text(encoding="utf-8")
 
-        self.assertTrue(default_skill.strip())
-        self.assertTrue(english_skill.strip())
+        self.assertTrue(skill.strip())
 
     def test_install_skill_creates_skill_md(self):
         """_install_skill should create SKILL.md in the first available skill dir."""
@@ -94,8 +92,8 @@ class TestSkillCommand(unittest.TestCase):
                 content = f.read()
             self.assertIn("Agent Reach", content)
 
-    def test_install_uses_english_skill_for_english_locale(self):
-        """_install_skill should install the English skill file for English locales."""
+    def test_installed_skill_is_english(self):
+        """_install_skill should install the single English SKILL.md plus references."""
         with tempfile.TemporaryDirectory() as tmpdir:
             skill_parent = os.path.join(tmpdir, ".openclaw", "skills")
             os.makedirs(skill_parent)
@@ -106,7 +104,6 @@ class TestSkillCommand(unittest.TestCase):
             ):
                 env = os.environ.copy()
                 env.pop("OPENCLAW_HOME", None)
-                env["LANG"] = "en_US.UTF-8"
                 with patch.dict(os.environ, env, clear=True):
                     _install_skill()
 
@@ -115,10 +112,9 @@ class TestSkillCommand(unittest.TestCase):
             with open(target, encoding="utf-8") as f:
                 content = f.read()
             self.assertTrue(content.strip())
-            self.assertIn("Xiaoyuzhou Podcast, LinkedIn", content)
-            # English-locale install must use the English variant, not the
-            # Chinese one. "\u5c0f\u7ea2\u4e66" (Xiaohongshu) only appears in SKILL.md.
-            self.assertNotIn("\u5c0f\u7ea2\u4e66", content)
+            self.assertIn("Internet Capability Router", content)
+            # The installed skill must be English-only: no CJK characters.
+            self.assertFalse(re.search(r"[\u4e00-\u9fff]", content))
             self.assertTrue(
                 os.path.exists(os.path.join(skill_parent, "agent-reach", "references"))
             )

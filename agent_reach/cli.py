@@ -346,27 +346,9 @@ def _install_skill():
     import shutil
     import importlib.resources
 
-    def _is_english_locale(value: str) -> bool:
-        normalized = value.strip().lower()
-        return normalized.startswith("en") or normalized.startswith("english")
-
-    def _skill_resource_name() -> str:
-        locale_candidates = (
-            os.environ.get("AGENT_REACH_LANG", ""),
-            os.environ.get("LC_ALL", ""),
-            os.environ.get("LC_MESSAGES", ""),
-            os.environ.get("LANG", ""),
-        )
-        if any(_is_english_locale(candidate) for candidate in locale_candidates):
-            return "SKILL_en.md"
-        return "SKILL.md"
-
     def _read_skill_markdown(skill_pkg):
-        resource_name = _skill_resource_name()
-        try:
-            return skill_pkg.joinpath(resource_name).read_text(encoding="utf-8")
-        except FileNotFoundError:
-            return skill_pkg.joinpath("SKILL.md").read_text(encoding="utf-8")
+        # SKILL.md is the single, canonical English skill file.
+        return skill_pkg.joinpath("SKILL.md").read_text(encoding="utf-8")
 
     def _copy_skill_dir(target: str) -> bool:
         """Copy entire skill directory (locale-specific SKILL.md + references/)."""
@@ -388,7 +370,7 @@ def _install_skill():
                 skill_pkg = Path(__file__).resolve().parent / "skill"
                 skill_md = _read_skill_markdown(skill_pkg)
 
-            # Copy SKILL.md using the selected locale file
+            # Write the skill markdown as SKILL.md
             with open(os.path.join(target, "SKILL.md"), "w", encoding="utf-8") as f:
                 f.write(skill_md)
 
