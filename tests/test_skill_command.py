@@ -3,6 +3,7 @@
 
 import importlib.resources
 import os
+import re
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -115,7 +116,9 @@ class TestSkillCommand(unittest.TestCase):
                 content = f.read()
             self.assertTrue(content.strip())
             self.assertIn("Xiaoyuzhou Podcast, LinkedIn", content)
-            self.assertNotIn("搜推特", content)
+            # English-locale install must use the English variant, not the
+            # Chinese one. "\u5c0f\u7ea2\u4e66" (Xiaohongshu) only appears in SKILL.md.
+            self.assertNotIn("\u5c0f\u7ea2\u4e66", content)
             self.assertTrue(
                 os.path.exists(os.path.join(skill_parent, "agent-reach", "references"))
             )

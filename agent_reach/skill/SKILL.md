@@ -1,132 +1,138 @@
 ---
 name: agent-reach
 description: >
-  MUST USE when user wants to 调研/research/搜索/search/查/找/look up anything
-  on the internet — e.g. 全网调研 X / 帮我调研一下 X / 查一下 X / 搜搜 X /
-  看看大家怎么评价 X / X 上有什么讨论 / research this topic。
+  MUST USE when user wants to research/search/look up/find anything
+  on the internet — e.g. "research X across the web" / "help me research X" /
+  "look up X" / "search for X" / "see what people think of X" /
+  "what discussions are there about X" / research this topic.
 
-  Also MUST USE when user mentions any platform or shares any URL/链接:
-  小红书/xiaohongshu/xhs, Twitter/推特/X, B站/bilibili, Reddit, V2EX,
-  LinkedIn/领英/招聘/求职/jobs, YouTube, GitHub code search, 小宇宙播客,
-  雪球/股票行情, RSS feeds, or any web URL.
+  Also MUST USE when user mentions any platform or shares any URL/link:
+  XiaoHongShu/xiaohongshu/xhs, Twitter/X, Bilibili, Reddit, V2EX,
+  LinkedIn/jobs/recruiting, YouTube, GitHub code search, Xiaoyuzhou Podcast,
+  Xueqiu/stock quotes, RSS feeds, or any web URL.
 
   13 platforms, multi-backend routing (OpenCLI / per-platform CLIs / APIs).
   Zero config for 6 channels. Run `agent-reach doctor --json` to see which
   backend serves each platform right now.
 
-  NOT for: 写报告/数据分析/翻译等内容加工（本 skill 只负责从互联网获取内容）；
-  发帖/评论/点赞等写操作；已有专门 skill 的平台（先用专门 skill）。
+  NOT for: writing reports / data analysis / translation and other content
+  processing (this skill only FETCHES content from the internet); posting /
+  commenting / liking and other write operations; platforms that already have
+  a dedicated skill (use the dedicated skill first).
 
-  【路由方式】SKILL.md 包含路由表和常用命令，复杂场景需按需阅读对应分类的 references/*.md。
-  分类：search / social (小红书/推特/B站/V2EX/Reddit) / career(LinkedIn) / dev(github) / web(网页/文章/RSS) / video(YouTube/B站/播客)。
+  [Routing] SKILL.md contains the routing table and common commands; for
+  complex scenarios, read the matching category's references/*.md as needed.
+  Categories: search / social (XiaoHongShu/Twitter/Bilibili/V2EX/Reddit) /
+  career (LinkedIn) / dev (github) / web (web pages/articles/RSS) /
+  video (YouTube/Bilibili/podcasts).
 triggers:
-  - research: 调研/全网调研/帮我调研/研究一下/research/深入了解
-  - search: 搜/查/找/search/搜索/查一下/帮我搜/看看大家怎么说
+  - research: research / research across the web / help me research / look into / research / dig deeper
+  - search: search / look up / find / search / search for / look it up / search for me / see what people say
   - social:
-    - 小红书: xiaohongshu/xhs/小红书/红书
-    - Twitter: twitter/推特/x.com/推文
-    - B站: bilibili/b站/哔哩哔哩
+    - XiaoHongShu: xiaohongshu/xhs/XiaoHongShu/Red
+    - Twitter: twitter/Twitter/x.com/tweet
+    - Bilibili: bilibili/Bilibili
     - V2EX: v2ex
     - Reddit: reddit
-  - career: 招聘/职位/求职/linkedin/领英/找工作
-  - dev: github/代码/仓库/gh/issue/pr/分支/commit
-  - web: 网页/链接/文章/rss/读一下/打开这个
-  - video: youtube/视频/播客/字幕/小宇宙/转录/yt
-  - finance: 雪球/股票/stock/xueqiu/行情/基金
+  - career: recruiting/job/job-hunting/linkedin/LinkedIn/looking for work
+  - dev: github/code/repository/gh/issue/pr/branch/commit
+  - web: web page/link/article/rss/read this/open this
+  - video: youtube/video/podcast/subtitles/Xiaoyuzhou/transcript/yt
+  - finance: Xueqiu/stock/stock/xueqiu/quotes/fund
 metadata:
   openclaw:
     homepage: https://github.com/Panniantong/Agent-Reach
 ---
 
-# Agent Reach — 互联网能力路由器
+# Agent Reach — Internet Capability Router
 
-13 平台、多后端。**本 skill 存在时必须用它访问这些平台，不要自己发明方案。**
+13 platforms, multiple backends. **When this skill exists, you must use it to access these platforms — do not invent your own approach.**
 
-## 常驻规则（全程适用）
+## Standing Rules (apply for the whole session)
 
-1. **动手前先体检**：多后端平台（小红书/Reddit/B站/Twitter）先跑
-   `agent-reach doctor --json`，按各平台 `active_backend` 字段选命令组。
-2. **声明你在用什么**：开始干活前说一句「使用 agent-reach 的 X 平台 / Y 后端」。
-3. **失败按 references 里的重试链处理**，不要瞎猜命令。
-4. **全网调研类任务**：组合多平台（Exa 搜索 + Twitter/Reddit 看讨论 + 小红书/B站看中文场景），并行收集再汇总。
-5. **替用户盯版本**：完成一次较大的调研/多平台任务后，顺手跑
-   `agent-reach check-update`（很快，一个 API 调用）。有新版就在收尾汇报里附一句：
-   「Agent Reach 有新版 vX.Y.Z，复制这句话给我即可更新：帮我更新 Agent Reach：
-   https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md」。
-   不要中断当前任务去更新，也不要重复提醒同一个版本。
+1. **Health-check before acting**: for multi-backend platforms (XiaoHongShu/Reddit/Bilibili/Twitter), run
+   `agent-reach doctor --json` first and pick the command group matching each platform's `active_backend` field.
+2. **Announce what you use**: before starting, say "using agent-reach, platform X / backend Y".
+3. **On failure, follow the retry chains in references/** — never guess commands.
+4. **Broad research tasks**: combine multiple platforms (Exa search + Twitter/Reddit for discussions + XiaoHongShu/Bilibili for Chinese-language context), collect in parallel, then synthesize.
+5. **Watch versions for the user**: after finishing a larger research / multi-platform task, run
+   `agent-reach check-update` (fast, one API call). If a new version exists, append one line to your wrap-up:
+   "Agent Reach vX.Y.Z is available — just paste this to me to update: help me update Agent Reach:
+   https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md".
+   Do not interrupt the current task to update, and do not repeat the reminder for the same version.
 
-## 路由表
+## Routing Table
 
-| 用户意图 | 分类 | 详细文档 |
+| User intent | Category | Details |
 |---------|------|---------|
-| 网页搜索/代码搜索 | search | [references/search.md](references/search.md) |
-| 小红书/推特/B站/V2EX/Reddit | social | [references/social.md](references/social.md) |
-| 招聘/职位/LinkedIn | career | [references/career.md](references/career.md) |
-| GitHub/代码 | dev | [references/dev.md](references/dev.md) |
-| 网页/文章/RSS | web | [references/web.md](references/web.md) |
-| YouTube/B站/播客字幕 | video | [references/video.md](references/video.md) |
+| Web search / code search | search | [references/search.md](references/search.md) |
+| XiaoHongShu / Twitter / Bilibili / V2EX / Reddit | social | [references/social.md](references/social.md) |
+| Recruiting / jobs / LinkedIn | career | [references/career.md](references/career.md) |
+| GitHub / code | dev | [references/dev.md](references/dev.md) |
+| Web pages / articles / RSS | web | [references/web.md](references/web.md) |
+| YouTube / Bilibili / podcast subtitles | video | [references/video.md](references/video.md) |
 
-## 零配置快速命令
+## Zero-Config Quick Commands
 
 ```bash
-# Exa 网页搜索
+# Exa web search
 mcporter call 'exa.web_search_exa(query: "query", numResults: 5)'
 
-# 通用网页阅读
+# Read any web page
 curl -s "https://r.jina.ai/URL"
 
-# GitHub 搜索
+# GitHub search
 gh search repos "query" --sort stars --limit 10
 
-# YouTube 字幕（注意：B站不要用 yt-dlp，见 video.md）
+# YouTube subtitles (NOTE: never use yt-dlp for Bilibili — see video.md)
 yt-dlp --write-sub --skip-download -o "/tmp/%(id)s" "URL"
 
-# V2EX 热门
+# V2EX hot topics
 curl -s "https://www.v2ex.com/api/topics/hot.json" -H "User-Agent: agent-reach/1.0"
 
-# B站搜索（bili-cli，无需登录）
+# Bilibili search (bili-cli, no login needed)
 bili search "query" --type video -n 5
 ```
 
-## 需登录态的平台（按 doctor 的 active_backend 选命令）
+## Login-Backed Platforms (pick the command group by doctor's active_backend)
 
 ```bash
-# Twitter 搜索（twitter-cli 首选；失败重试链见 social.md）
+# Twitter search (twitter-cli preferred; retry chain in social.md)
 twitter search "query" -n 10
 
-# Reddit（无零配置路径：OpenCLI 或 rdt-cli，必须登录态）
-opencli reddit search "query" -f yaml   # 桌面
-rdt search "query" --limit 10            # 存量/服务器
+# Reddit (no zero-config path: OpenCLI or rdt-cli, login session required)
+opencli reddit search "query" -f yaml   # desktop
+rdt search "query" --limit 10            # legacy/server
 
-# 小红书（桌面首选 OpenCLI）
+# XiaoHongShu (desktop prefers OpenCLI)
 opencli xiaohongshu search "query" -f yaml
 ```
 
-## 环境检查
+## Environment Check
 
 ```bash
-# 检查可用 channel 与每个平台当前激活的后端
+# Check available channels and the currently active backend for each platform
 agent-reach doctor --json
 ```
 
-## 工作区规则
+## Workspace Rules
 
-**不要在 agent workspace 创建文件。** 使用 `/tmp/` 存放临时输出，`~/.agent-reach/` 存放持久数据。
+**Do not create files in the agent workspace.** Use `/tmp/` for temporary output and `~/.agent-reach/` for persistent data.
 
-## 详细文档
+## Detailed References
 
-根据用户需求，阅读对应的详细文档：
+Based on the user's needs, read the matching reference doc:
 
-- [搜索工具](references/search.md) — Exa AI 搜索
-- [社交媒体](references/social.md) — 小红书, Twitter, B站, V2EX, Reddit（多后端命令组）
-- [职场招聘](references/career.md) — LinkedIn
-- [开发工具](references/dev.md) — GitHub CLI
-- [网页阅读](references/web.md) — Jina Reader, RSS
-- [视频播客](references/video.md) — YouTube, B站, 小宇宙
+- [Search Tools](references/search.md) — Exa AI search
+- [Social Media](references/social.md) — XiaoHongShu, Twitter, Bilibili, V2EX, Reddit (multi-backend command groups)
+- [Jobs & Recruiting](references/career.md) — LinkedIn
+- [Development Tools](references/dev.md) — GitHub CLI
+- [Web Reading](references/web.md) — Jina Reader, RSS
+- [Video & Podcasts](references/video.md) — YouTube, Bilibili, Xiaoyuzhou
 
-## 配置渠道
+## Configure a Channel
 
-如果某个 channel 需要配置，获取安装指南：
+If a channel needs configuration, fetch the install guide:
 https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
 
-用户只需提供 cookies，其他配置由 agent 完成。
+The user only needs to provide cookies; the agent handles the rest of the configuration.
