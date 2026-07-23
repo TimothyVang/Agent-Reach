@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Tests for 'agent-reach skill' command and _install_skill / _uninstall_skill."""
+"""Tests for the 'agent-reach-english skill' command and _install_skill / _uninstall_skill."""
 
 import importlib.resources
 import os

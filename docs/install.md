@@ -97,25 +97,28 @@ After installing the basics, **ask the user** which additional channels they nee
 >
 > There are also these optional channels — which ones do you need?
 >
-> - 🌟 **OpenCLI** (recommended for desktop) — install once and unlock XiaoHongShu / Reddit / Bilibili subtitles / Twitter fallback all at once (reuses your browser login session, zero config; you only need to click "Add extension" once in the Chrome Web Store)
+> - 🌟 **OpenCLI** (recommended for desktop) — install once and unlock XiaoHongShu / Reddit / Facebook / Instagram / Bilibili subtitles / Twitter fallback all at once (reuses your browser login session, zero config; you only need to click "Add extension" once in the Chrome Web Store)
 > - 🐦 **Twitter/X** — search tweets, view timelines (requires login cookies)
 > - 📈 **Xueqiu** — stock quotes, trending posts (requires login cookies)
 > - 🎙️ **Xiaoyuzhou Podcast** — audio transcription (requires a free Groq key)
 > - 📕 **XiaoHongShu** — search, read, comment (desktop uses OpenCLI; servers use xiaohongshu-mcp with QR scan)
 > - 📖 **Reddit** — search and read posts (login session required: desktop OpenCLI or rdt-cli + cookies)
+> - 📘 **Facebook** — search, pages, feed, groups list (desktop OpenCLI, reuses your Chrome login session)
+> - 📷 **Instagram** — user search, profiles, a user's recent posts, Explore (desktop OpenCLI, reuses your Chrome login session)
 > - 📺 **Bilibili (full version)** — trending, rankings, search, video details (bili-cli, no login required)
 > - 💼 **LinkedIn** — profiles, job search
 >
-> Tell me which ones you want, for example "Help me install XiaoHongShu and Twitter". Or say "install everything".
+> Tell me which ones you want, for example "Help me install XiaoHongShu and Twitter" or "Help me install Facebook and Instagram". Or say "install everything".
 
 Based on the user's choice, run:
 
 ```bash
 agent-reach-english install --env=auto --channels=opencli,xiaohongshu   # Example: desktop user chose XHS (OpenCLI-backed)
+agent-reach-english install --env=auto --channels=facebook,instagram    # Example: desktop user chose Meta social channels
 agent-reach-english install --env=auto --channels=all              # User wants everything
 ```
 
-Supported channel names: `opencli`, `twitter`, `xiaoyuzhou`, `xueqiu`, `xiaohongshu`, `reddit`, `bilibili`, `linkedin`, `all`
+Supported channel names: `opencli`, `twitter`, `xiaoyuzhou`, `xueqiu`, `xiaohongshu`, `reddit`, `facebook`, `instagram`, `bilibili`, `linkedin`, `all`
 
 ### Step 3: Fix what's broken
 
@@ -129,19 +132,19 @@ Only ask the user when you genuinely need their input (credentials, permissions,
 
 Some channels need credentials only the user can provide. Based on the doctor output, ask for what's missing:
 
-> 🔒 **Security tip:** For platforms that need cookies (Twitter, XiaoHongShu), we recommend using a **dedicated/secondary account** rather than your main account. Cookie-based auth carries two risks:
+> 🔒 **Security tip:** For platforms that need cookies or browser sessions (Twitter, XiaoHongShu, Reddit, Facebook, Instagram), we recommend using a **dedicated/secondary account** rather than your main account. Cookie/browser-session auth carries two risks:
 > 1. **Account ban** — platforms may detect non-browser API calls and restrict or ban the account
 > 2. **Credential exposure** — cookies grant full account access; using a secondary account limits the blast radius if credentials are ever compromised
 
-> 🍪 **Cookie import (applies to all platforms that require login):**
+> 🍪 **Cookies / login sessions:**
 >
-> For every platform that needs cookies (Twitter, XiaoHongShu, Xueqiu, etc.), **prefer importing with Cookie-Editor** — it is the simplest and most reliable method:
+> For traditional CLIs that need cookies (Twitter, Xueqiu, etc.), **prefer importing with Cookie-Editor** — it is the simplest and most reliable method:
 > 1. Have the user log into the platform in their own browser
 > 2. Install the [Cookie-Editor](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) Chrome extension
 > 3. Click the extension → Export → Header String
 > 4. Send the exported string to the agent
 >
-> **Local desktop users** can also use `agent-reach-english configure --from-browser chrome` to extract everything automatically in one step (supports Twitter + XiaoHongShu + Xueqiu).
+> **Local desktop users** can also use `agent-reach-english configure --from-browser chrome` to extract everything automatically in one step (supports Twitter + XiaoHongShu + Xueqiu). OpenCLI-backed platforms (Reddit, the XiaoHongShu desktop backend, Facebook, Instagram) prefer reusing your Chrome login session — no cookies need to be sent to the agent.
 
 **Twitter search & posting:**
 > "To unlock Twitter search, I need your Twitter cookies. Install the Cookie-Editor Chrome extension, go to x.com/twitter.com, click the extension → Export → Header String, and paste it to me."
@@ -200,6 +203,28 @@ agent-reach-english install --channels opencli
 > ```bash
 > agent-reach-english configure xhs-cookies "key1=val1; key2=val2; ..."
 > ```
+
+**Facebook / Instagram (desktop OpenCLI):**
+> These two platforms go through OpenCLI: they reuse the user's own Chrome login session, store no account passwords, and skip the Meta Graph API approval flow. Not recommended on servers / headless environments.
+
+```bash
+agent-reach-english install --channels facebook,instagram
+```
+
+> After installing:
+> 1. Confirm Chrome has the OpenCLI extension installed and `opencli doctor` passes
+> 2. Log into facebook.com / instagram.com in Chrome
+> 3. The agent calls the tools directly:
+>    ```bash
+>    opencli facebook search "query" -f yaml
+>    opencli facebook profile zuck -f yaml
+>    opencli facebook groups -f yaml
+>    opencli instagram search "query" -f yaml     # user search
+>    opencli instagram profile nasa -f yaml
+>    opencli instagram user nasa -f yaml          # a user's recent posts
+>    ```
+>
+> Facebook Groups currently only promises reading the group list / recent activity visible to the logged-in user — not an arbitrary group posts-and-comments API. Instagram's search is a user search, not a site-wide post keyword search; on 429 / login errors, have the user log in again in Chrome and lower the request rate.
 
 **Xueqiu (stock quotes + trending posts):**
 > "Xueqiu needs cookies from a logged-in session. First log into xueqiu.com in Chrome, then run:"
@@ -325,6 +350,8 @@ After installation, use upstream tools directly. See SKILL.md for the full comma
 | YouTube | `yt-dlp` | `yt-dlp --dump-json URL` |
 | Bilibili | `bili` (subtitles via `opencli`) | `bili search "query" --type video` / `opencli bilibili subtitle BVxxx` |
 | Reddit | `opencli` (fallback `rdt`) | `opencli reddit search "query" -f yaml` / `rdt read POST_ID` |
+| Facebook | `opencli` | `opencli facebook search "query" -f yaml` |
+| Instagram | `opencli` | `opencli instagram user nasa -f yaml` |
 | GitHub | `gh` | `gh search repos "query"` |
 | Web | `curl` + Jina | `curl -s "https://r.jina.ai/URL"` |
 | Exa Search | `mcporter` | `mcporter call 'exa.web_search_exa(...)'` |

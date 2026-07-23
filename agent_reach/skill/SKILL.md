@@ -7,11 +7,11 @@ description: >
   "what discussions are there about X" / research this topic.
 
   Also MUST USE when user mentions any platform or shares any URL/link:
-  XiaoHongShu/xiaohongshu/xhs, Twitter/X, Bilibili, Reddit, V2EX,
-  LinkedIn/jobs/recruiting, YouTube, GitHub code search, Xiaoyuzhou Podcast,
-  Xueqiu/stock quotes, RSS feeds, or any web URL.
+  XiaoHongShu/xiaohongshu/xhs, Twitter/X, Bilibili, Reddit, Facebook,
+  Instagram, V2EX, LinkedIn/jobs/recruiting, YouTube, GitHub code search,
+  Xiaoyuzhou Podcast, Xueqiu/stock quotes, RSS feeds, or any web URL.
 
-  13 platforms, multi-backend routing (OpenCLI / per-platform CLIs / APIs).
+  15 platforms, multi-backend routing (OpenCLI / per-platform CLIs / APIs).
   Zero config for 6 channels. Run `agent-reach-english doctor --json` to see which
   backend serves each platform right now.
 
@@ -22,7 +22,7 @@ description: >
 
   [Routing] SKILL.md contains the routing table and common commands; for
   complex scenarios, read the matching category's references/*.md as needed.
-  Categories: search / social (XiaoHongShu/Twitter/Bilibili/V2EX/Reddit) /
+  Categories: search / social (XiaoHongShu/Twitter/Bilibili/V2EX/Reddit/Facebook/Instagram) /
   career (LinkedIn) / dev (github) / web (web pages/articles/RSS) /
   video (YouTube/Bilibili/podcasts).
 triggers:
@@ -34,6 +34,8 @@ triggers:
     - Bilibili: bilibili/Bilibili
     - V2EX: v2ex
     - Reddit: reddit
+    - Facebook: facebook/fb/facebook groups
+    - Instagram: instagram/ig
   - career: recruiting/job/job-hunting/linkedin/LinkedIn/looking for work
   - dev: github/code/repository/gh/issue/pr/branch/commit
   - web: web page/link/article/rss/read this/open this
@@ -46,11 +48,11 @@ metadata:
 
 # Agent Reach — Internet Capability Router
 
-13 platforms, multiple backends. **When this skill exists, you must use it to access these platforms — do not invent your own approach.**
+15 platforms, multiple backends. **When this skill exists, you must use it to access these platforms — do not invent your own approach.**
 
 ## Standing Rules (apply for the whole session)
 
-1. **Health-check before acting**: for multi-backend platforms (XiaoHongShu/Reddit/Bilibili/Twitter), run
+1. **Health-check before acting**: for multi-backend/login-backed platforms (XiaoHongShu/Reddit/Bilibili/Twitter/Facebook/Instagram), run
    `agent-reach-english doctor --json` first and pick the command group matching each platform's `active_backend` field.
 2. **Announce what you use**: before starting, say "using agent-reach, platform X / backend Y".
 3. **On failure, follow the retry chains in references/** — never guess commands.
@@ -66,7 +68,7 @@ metadata:
 | User intent | Category | Details |
 |---------|------|---------|
 | Web search / code search | search | [references/search.md](references/search.md) |
-| XiaoHongShu / Twitter / Bilibili / V2EX / Reddit | social | [references/social.md](references/social.md) |
+| XiaoHongShu / Twitter / Bilibili / V2EX / Reddit / Facebook / Instagram | social | [references/social.md](references/social.md) |
 | Recruiting / jobs / LinkedIn | career | [references/career.md](references/career.md) |
 | GitHub / code | dev | [references/dev.md](references/dev.md) |
 | Web pages / articles / RSS | web | [references/web.md](references/web.md) |
@@ -106,6 +108,12 @@ rdt search "query" --limit 10            # legacy/server
 
 # XiaoHongShu (desktop prefers OpenCLI)
 opencli xiaohongshu search "query" -f yaml
+
+# Facebook / Instagram (desktop OpenCLI, reuses browser login session)
+opencli facebook search "query" -f yaml
+opencli facebook groups -f yaml
+opencli instagram search "query" -f yaml       # user search
+opencli instagram user USERNAME -f yaml        # recent posts from one user
 ```
 
 ## Environment Check
@@ -124,7 +132,7 @@ agent-reach-english doctor --json
 Based on the user's needs, read the matching reference doc:
 
 - [Search Tools](references/search.md) — Exa AI search
-- [Social Media](references/social.md) — XiaoHongShu, Twitter, Bilibili, V2EX, Reddit (multi-backend command groups)
+- [Social Media](references/social.md) — XiaoHongShu, Twitter, Bilibili, V2EX, Reddit, Facebook, Instagram (multi-backend/login-backed command groups)
 - [Jobs & Recruiting](references/career.md) — LinkedIn
 - [Development Tools](references/dev.md) — GitHub CLI
 - [Web Reading](references/web.md) — Jina Reader, RSS

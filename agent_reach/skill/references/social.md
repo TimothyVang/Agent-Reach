@@ -1,6 +1,6 @@
 # Social Media & Communities
 
-XiaoHongShu, Twitter/X, Bilibili, V2EX, Reddit.
+XiaoHongShu, Twitter/X, Bilibili, V2EX, Reddit, Facebook, Instagram.
 
 ## XiaoHongShu (multi-backend)
 
@@ -230,3 +230,46 @@ rdt all --limit 10              # Browse /r/all
 ### Advanced option: official API + PRAW (only for users who already have credentials)
 
 Users who registered a Reddit script app before 2025-11 (holding a client_id/client_secret) can use PRAW with the official API (100 QPM free). New applications require manual review and personal projects are almost never approved, so **do not recommend this path to new users**.
+
+## Facebook (OpenCLI, logged-in session required)
+
+Facebook goes through OpenCLI, reusing the facebook.com login session in the user's Chrome. Run `agent-reach-english doctor --json` first and check facebook's `active_backend` — it should normally be `OpenCLI`. Do not recommend Jina/Exa/Graph API as the default path.
+
+```bash
+# Search users / pages / posts
+opencli facebook search "query" -f yaml
+
+# User or page info
+opencli facebook profile zuck -f yaml
+
+# Current account's News Feed
+opencli facebook feed --limit 10 -f yaml
+
+# Groups visible to the current account (list / recent activity)
+opencli facebook groups --limit 20 -f yaml
+```
+
+> Requires Chrome open with the OpenCLI extension installed and a facebook.com login. Facebook Groups currently only promises reading the group list / recent activity visible to the current account — not an arbitrary group posts-and-comments API.
+
+## Instagram (OpenCLI, logged-in session required)
+
+Instagram goes through OpenCLI, reusing the instagram.com login session in the user's Chrome. Run `agent-reach-english doctor --json` first and check instagram's `active_backend` — it should normally be `OpenCLI`. Do not fall back to instaloader by default; its cookies/401/429 behavior has historically been unstable.
+
+```bash
+# Search users (not a site-wide post keyword search)
+opencli instagram search "query" -f yaml
+
+# User profile
+opencli instagram profile nasa -f yaml
+
+# A user's recent posts
+opencli instagram user nasa --limit 12 -f yaml
+
+# Explore / Discover
+opencli instagram explore --limit 20 -f yaml
+
+# Current account's saved posts
+opencli instagram saved --limit 20 -f yaml
+```
+
+> Requires Chrome open with the OpenCLI extension installed and an instagram.com login. `instagram search` is a user search; to read posts, determine the username first, then use `instagram user USERNAME`. On 429 / login required, have the user log in again in Chrome and lower the request rate.

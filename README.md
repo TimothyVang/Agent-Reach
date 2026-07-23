@@ -9,10 +9,13 @@
 </p>
 
 <p align="center">
+  <a href="https://trendshift.io/repositories/24387"><img src="https://trendshift.io/api/badge/repositories/24387" alt="Trendshift GitHub Trending #1 Repository of the Day"></a>
+</p>
+
+<p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-green.svg?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10+"></a>
   <a href="https://github.com/TimothyVang/Agent-Reach/stargazers"><img src="https://img.shields.io/github/stars/TimothyVang/Agent-Reach?style=for-the-badge" alt="GitHub Stars"></a>
-  <a href="https://trendshift.io/repositories/24387"><img src="https://trendshift.io/api/badge/repositories/24387" alt="Trendshift GitHub Trending #1 Repository of the Day"></a>
 </p>
 
 <p align="center">
@@ -79,6 +82,8 @@ Update Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/ma
 | 🐦 **Twitter/X** | Read single tweets | Search tweets, browse timeline, read articles | Tell your Agent "help me set up Twitter" |
 | 📺 **Bilibili** | Search + video detail (bili-cli, no login needed) | Subtitles (OpenCLI) | Tell your Agent "help me set up Bilibili" |
 | 📖 **Reddit** | — (no zero-config path: anonymous endpoints are blocked) | Search + read posts and comments | Desktop: install OpenCLI and use the browser session; or rdt-cli + cookie |
+| 📘 **Facebook** | — | Search, pages, feed, groups list | Desktop: install OpenCLI (reuses your Chrome login session) |
+| 📷 **Instagram** | — | User search, profiles, a user's recent posts, Explore | Desktop: install OpenCLI (reuses your Chrome login session) |
 | 📕 **XiaoHongShu** | — | Search, read, comment | Desktop: install OpenCLI (works once you've browsed XiaoHongShu); server: xiaohongshu-mcp with QR login |
 | 💼 **LinkedIn** | Jina Reader reads public pages | Profile details, company pages, job search | Tell your Agent "help me set up LinkedIn" |
 | 💻 **V2EX** | Hot topics, node topics, topic detail + replies, user info | — | No configuration needed |
@@ -87,7 +92,7 @@ Update Agent Reach: https://raw.githubusercontent.com/TimothyVang/Agent-Reach/ma
 
 > **Not sure how to configure it? No need to read the docs.** Just tell your Agent "help me set up XXX" — it knows what's needed and will walk you through it step by step.
 >
-> 🍪 For platforms that need cookies (Twitter, XiaoHongShu, etc.), **prefer** the Chrome extension [Cookie-Editor](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) to export your cookies, then send them to the Agent to configure. The flow is the same everywhere: log in via your browser → export with Cookie-Editor → send to the Agent. Simpler and more reliable than QR scanning.
+> 🍪 For platforms that need cookies / login sessions (Twitter, XiaoHongShu, Reddit, Facebook, Instagram, etc.), prefer having the user log in via their own browser. OpenCLI reuses the Chrome login session; only traditional CLIs need cookies exported with [Cookie-Editor](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm).
 >
 > 🔒 Cookies stay local — never uploaded, never shared. The code is fully open source and can be audited anytime.
 > 💻 Local computers don't need a proxy. A proxy is only needed when deploying on a server (~$1/month).
@@ -132,7 +137,7 @@ That's the only step. The Agent takes care of everything else on its own.
 3. **Configures the search engine** — connects Exa via MCP (free, no API key needed)
 4. **Detects the environment** — determines whether you're on a local computer or a server, and gives matching configuration advice
 5. **Registers SKILL.md** — installs the usage guide in the Agent's skills directory, so that later, whenever the Agent hits a request like "research the web," "search Twitter," or "watch a video," it automatically knows which upstream tool to call
-6. **Asks whether you want more** — by default it only activates the 6 zero-config channels; for login-required ones like XiaoHongShu, Twitter, and Reddit, the Agent presents a menu and asks which you want, installing only the ones you name
+6. **Asks whether you want more** — by default it only activates the 6 zero-config channels; for login-required ones like XiaoHongShu, Twitter, Reddit, Facebook, and Instagram, the Agent presents a menu and asks which you want, installing only the ones you name
 
 After installation, `agent-reach-english doctor` — one command — tells you the status of each channel and which path it's currently taking.
 </details>
@@ -150,13 +155,13 @@ No configuration needed — just tell your Agent:
 - "Search the web for an LLM framework comparison" → Exa semantic search
 - "Subscribe to this RSS feed" → `feedparser` parses it
 
-**No commands to remember.** After reading SKILL.md, the Agent knows what to call on its own. For login-required platforms (XiaoHongShu, Twitter, Reddit), just tell the Agent "help me set up XXX" to unlock them.
+**No commands to remember.** After reading SKILL.md, the Agent knows what to call on its own. For login-required platforms (XiaoHongShu, Twitter, Reddit, Facebook, Instagram), just tell the Agent "help me set up XXX" to unlock them.
 
 ---
 
 ## Capability Boundary: Reading Content vs Operating Web Pages
 
-Some tasks go beyond "reading": operating logged-in web pages, submitting forms, isolating multiple accounts, running parallel browser sessions, or handing off high-friction steps in automation flows such as login, verification, and risk-control prompts. For these "hands-on" scenarios, Agent Reach can be paired with browser automation tools like [BrowserAct](https://www.browseract.ai/Agent) — 30+ prebuilt platform skills, supporting mainstream Agents such as Claude Code, OpenClaw, and Cursor.
+Some tasks go beyond "reading": operating logged-in web pages, submitting forms, isolating multiple accounts, running parallel browser sessions, or handing off high-friction steps in automation flows such as login, verification, and risk-control prompts. For these "hands-on" scenarios, Agent Reach can be paired with browser automation tools like [BrowserAct](https://www.browseract.com/?co-from=Agent&redirect=https://github.com/browser-act/skills/tree/main) — 30+ prebuilt platform skills, supporting mainstream Agents such as Claude Code, OpenClaw, and Cursor.
 
 ---
 
@@ -180,6 +185,8 @@ channels/
 ├── github.py       → gh CLI
 ├── bilibili.py     → bili-cli ▸ OpenCLI ▸ search API (yt-dlp blocked by Bilibili's risk control, retired)
 ├── reddit.py       → OpenCLI ▸ rdt-cli (no zero-config path, login required)
+├── facebook.py     → OpenCLI (desktop browser session)
+├── instagram.py    → OpenCLI (desktop browser session)
 ├── xiaohongshu.py  → OpenCLI ▸ xiaohongshu-mcp ▸ xhs-cli
 ├── linkedin.py     → linkedin-mcp ▸ Jina Reader
 ├── rss.py          → feedparser
@@ -196,6 +203,8 @@ Each channel file **actually probes** its candidate backends in order (not just 
 | Read web pages | [Jina Reader](https://github.com/jina-ai/reader) | — | Free, no API key needed |
 | Read tweets | [twitter-cli](https://github.com/public-clis/twitter-cli) | [OpenCLI](https://github.com/jackwener/opencli) | Reliable search in real-world tests; OpenCLI falls back on your browser session |
 | Reddit | [OpenCLI](https://github.com/jackwener/opencli) (desktop) | [rdt-cli](https://github.com/public-clis/rdt-cli) | Anonymous endpoints blocked, official API approval-gated — logged-in sessions are the only route left |
+| Facebook | [OpenCLI](https://github.com/jackwener/opencli) (desktop) | — | Graph/Groups API access is heavily restricted; the browser session is the practical route today |
+| Instagram | [OpenCLI](https://github.com/jackwener/opencli) (desktop) | Official Graph API (Business/Creator + review) | Instaloader-style paths are unstable; OpenCLI reuses the real browser session |
 | YouTube subtitles + search | [yt-dlp](https://github.com/yt-dlp/yt-dlp) | — | 154K stars, still the best for YouTube (note: no longer used for Bilibili) |
 | Bilibili | [bili-cli](https://github.com/public-clis/bilibili-cli) | OpenCLI ▸ search API | yt-dlp is 412-blocked by Bilibili's risk control (verified June 2026); bili-cli searches and reads without login |
 | Search the web | [Exa](https://exa.ai) via [mcporter](https://github.com/nicobailon/mcporter) | — | AI semantic search, MCP integration, no key needed |
@@ -224,7 +233,7 @@ Agent Reach takes security seriously by design:
 
 > ⚠️ **Account-ban risk warning:** For platforms you log into with cookies (Twitter, XiaoHongShu, etc.), calling them via scripts/APIs **carries a risk of being detected and banned by the platform**. Always use a **dedicated secondary account**, not your main account.
 
-For platforms that need cookies (Twitter, XiaoHongShu), we recommend using a **dedicated secondary account** rather than your main account, for two reasons:
+For platforms that need cookies or login sessions (Twitter, XiaoHongShu, Reddit, Facebook, Instagram, etc.), we recommend using a **dedicated secondary account** rather than your main account, for two reasons:
 1. **Ban risk** — the platform may detect API calls that don't come from a normal browser, leading to the account being restricted or banned
 2. **Security risk** — a cookie is equivalent to full login privileges; using a secondary account limits the blast radius if the credentials leak
 
@@ -322,12 +331,6 @@ Yes! Agent Reach is an installer + configuration tool — any AI coding agent th
 **OpenClaw note:** If your OpenClaw is using the default `messaging` tool profile, the agent won't be able to run shell commands. Enable exec first: `openclaw config set tools.profile "coding"` (or set `"tools": { "profile": "coding" }` in `~/.openclaw/openclaw.json`), then restart the Gateway and start a new conversation before installing.
 </details>
 
-<details>
-<summary><strong>Is this free? Any API costs?</strong></summary>
-
-100% free. All backends are open-source tools (OpenCLI, twitter-cli, bili-cli, rdt-cli, yt-dlp, Jina Reader, Exa, xiaohongshu-mcp, etc.) that don't require paid API keys. The only optional cost is a residential proxy (~$1/month) if your network blocks Reddit/Twitter (e.g. mainland China).
-</details>
-
 ---
 
 ## Credits
@@ -339,7 +342,19 @@ Yes! Agent Reach is an installer + configuration tool — any AI coding agent th
 - 📧 **Email:** pnt01@foxmail.com
 - 🐦 **Twitter/X:** [@Neo_Reidlab](https://x.com/Neo_Reidlab)
 
-To chat or collaborate, add me on WeChat and I'll invite you to the community group:
+## Business Collaboration / Agent Deployment
+
+I (the upstream author) take on custom Agent consulting and deployment work.
+
+If there is any step in your company's production, operations, marketing, investment research, data processing, content processing, or other business workflows that you would like to automate with an Agent, feel free to add me on WeChat to discuss.
+
+You don't need a fully formed plan. As long as you have a real workflow, a real problem, or a real need, we can figure out together whether an Agent can solve it and how.
+
+When adding, note: `Business + what you want the Agent to do for you`
+
+Builders are welcome too — note: `Builder + what you're building`
+
+Just want to join the community group? Note: `Join group`
 
 <p align="center">
   <img src="docs/wechat-group-qr.jpg" width="280" alt="WeChat QR">
@@ -353,7 +368,11 @@ To chat or collaborate, add me on WeChat and I'll invite you to the community gr
 
 ## Friends
 
-[OpenClaw on Tencent Cloud](https://www.tencentcloud.com/act/pro/intl-openclaw?referral_code=G76Y819A&lang=zh&pg=) — Deploy the all-in-one OpenClaw assistant on Tencent Cloud Lighthouse in seconds, connect Agent Reach seamlessly through conversation, and give your OpenClaw one-click access to the internet.
+[Ark Agent Plan model subscription](https://dis.chatdesks.cn/chatdesk/hsyqAgent-Reach.html) — integrates ByteDance's in-house SOTA models, including Doubao-Seed, Doubao-Seedance, Doubao-Seedream, and more, covering multimodal tasks across text, code, images, and video. It now supports MiniMax-M3, DeepSeek-V4 series, GLM-5.2, Doubao-Seed-2.0 series, Kimi-K2.6, and more, with no tool restrictions. Upgrade to a full-modal model suite and Harness in one step, with deep support for Agent frameworks and AI coding tools. One subscription lets you switch to the right AI engine for each task.
+
+[OpenClaw on Tencent Cloud](https://www.tencentcloud.com/act/pro/intl-openclaw?referral_code=G76Y819A&lang=en&pg=) — Deploy the all-in-one OpenClaw assistant on Tencent Cloud Lighthouse in seconds, connect Agent Reach seamlessly through conversation, and give your OpenClaw one-click access to the internet.
+
+[Agent Skills Hub](https://agentskillshub.top/) — Find Claude skills & MCP servers without guessing what's safe. Every one of 133,000+ entries is security-graded, quality-scored, and refreshed every 8 hours.
 
 [AtomGit mirror](https://atomgit.com/qq_51337814/Agent-Reach) — A synchronized AtomGit mirror of Agent Reach for easier access and cloning within China.
 

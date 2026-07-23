@@ -47,6 +47,7 @@ agent-reach-english transcribe "https://www.youtube.com/watch?v=VIDEO_ID"
 agent-reach-english transcribe ./local_audio.mp3 -o /tmp/transcript.txt
 ```
 
+> `agent-reach-english transcribe` only accepts public http(s) URLs or local audio files. When searching with `ytsearch5:`, pick a specific video URL from the yt-dlp results first, then transcribe it.
 > Configure a key first: `agent-reach-english configure groq-key gsk_xxx` (free, console.groq.com)
 > or `agent-reach-english configure openai-key sk-xxx`. Default auto mode: if groq fails, it automatically falls back to openai.
 
